@@ -23,13 +23,20 @@ public class OnCollisionDie : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Base")
+    {   
+        // collision with base
+        if (collision.CompareTag("Base"))
         {
             this.GetComponent<EnemyMovement>().stopped = true;
             GameObject.Destroy(this.gameObject);
         }
 
+        // collision with bullet
+        if (collision.CompareTag("Bullet"))
+        {
+            GameObject.Destroy(this.gameObject);
+            GameObject.Destroy(collision.gameObject);
+        }
     }
 
 }
