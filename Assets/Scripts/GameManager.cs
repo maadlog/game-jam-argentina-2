@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Text CounterText;
 
 	int score = 0;
-    int refugees = 14;
+    int refugees = 0;
     int max_refugees = 15;
 	static GameManager gameManager;
 	float menuTimer;
