@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
-  rotateSpeed: 1
+  rotateSpeed: 5
   shootColdDown: 0.5
   gun: {fileID: 8737942957686502754}
   bullet: {fileID: 4334897589421178503, guid: 70b71548a1613194dacdff23ec871f64, type: 3}

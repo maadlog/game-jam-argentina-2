@@ -29,6 +29,7 @@ public class OnCollisionDie : MonoBehaviour
         {
             this.GetComponent<EnemyMovement>().stopped = true;
             GameObject.Destroy(this.gameObject);
+            GameObject.FindObjectOfType<Base>().GetHit(10);
         }
 
         // collision with bullet
@@ -37,6 +38,7 @@ public class OnCollisionDie : MonoBehaviour
             GameObject.Destroy(this.gameObject);
             GameObject.Destroy(collision.gameObject);
         }
+
     }
 
 }
