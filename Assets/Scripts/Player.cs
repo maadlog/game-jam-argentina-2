@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
 	public float rotateSpeed = 1f;
 	public float shootColdDown = 2f;
 
-	public GameObject gun;
+    public Transform[] guns;
+	public GameObject gunLeft;
 	public GameObject bullet;
 
 	float shootTimer;
@@ -24,12 +25,19 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		transform.Rotate(0.0f, 0.0f, -Input.GetAxis("Horizontal") * rotateSpeed);
-		float moveVertical = Input.GetAxis("Vertical");
-		transform.position += moveVertical * transform.right * movementSpeed * Time.deltaTime;
+        Movement();
 
 		Shoot();
 	}
+
+    void Movement() {
+        // Handle rotation
+		transform.Rotate(0.0f, 0.0f, -Input.GetAxis("Horizontal") * rotateSpeed);
+
+        // Handle foward or backwards
+		float moveVertical = Input.GetAxis("Vertical");
+		transform.position += moveVertical * transform.right * movementSpeed * Time.deltaTime;
+    }
 
 	float timeShooting = 0f;
 	float timeShootingLimit = 1f;
@@ -45,7 +53,7 @@ public class Player : MonoBehaviour
 					timeShooting = timeShootingLimit;
 				}
 
-				var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
+				var sign = (int)Math.Round(UnityEngine.Random.Range(-0.4f, 0.4f), 0);
 				var intDisplace = UnityEngine.Random.Range(0f, 2f) * sign;
 
 				float proportion = timeShooting / timeShootingLimit;
@@ -57,16 +65,22 @@ public class Player : MonoBehaviour
 					animator.Play("Shoot");
 				}
 
-				var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
-				var trasn = gun.transform.position + displace;
-				Instantiate(bullet, trasn, transform.rotation);
+                foreach (Transform gun in guns)
+                {
+                    var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
+				    var trasn = gun.transform.position + displace;
+				    Instantiate(bullet, trasn, transform.rotation);
+                }
+
+				// var displace = gunLeft.transform.TransformVector(new Vector3(0, disp, 0));
+				// var trasn = gunLeft.transform.position + displace;
+                // Instantiate(bullet, trasn, transform.rotation);
 				shootTimer = shootColdDown;
 			}
 			else
 			{
 				timeShooting = 0f;
 			}
-
 		}
 		else
 		{
