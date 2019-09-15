@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1885755041726348123}
   - component: {fileID: 6531707884800616512}
   - component: {fileID: 6531707884800616513}
-  - component: {fileID: -2316496950993189129}
+  - component: {fileID: 7261360423320464721}
   m_Layer: 0
   m_Name: EnemyShoot
   m_TagString: EnemyBullet
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 15
---- !u!114 &-2316496950993189129
+--- !u!114 &7261360423320464721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,6 +121,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7389826262903693186}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aac5efa3ed658ae4d8bb685b1a388be6, type: 3}
+  m_Script: {fileID: 11500000, guid: f8a3785e473aca944974409476859fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
