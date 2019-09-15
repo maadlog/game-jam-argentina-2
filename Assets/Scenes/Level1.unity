@@ -1484,6 +1484,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base
       objectReference: {fileID: 0}
+    - target: {fileID: 5109236107827401782, guid: be55d8b50bd1b464bba516640a0076c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5109236107827401787, guid: be55d8b50bd1b464bba516640a0076c2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1545,6 +1550,10 @@ PrefabInstance:
       objectReference: {fileID: 1272610936}
     - target: {fileID: 829810015, guid: be55d8b50bd1b464bba516640a0076c2, type: 3}
       propertyPath: uihealth
+      value: 
+      objectReference: {fileID: 222570632}
+    - target: {fileID: 829810015, guid: be55d8b50bd1b464bba516640a0076c2, type: 3}
+      propertyPath: uiHealth
       value: 
       objectReference: {fileID: 222570632}
     m_RemovedComponents: []

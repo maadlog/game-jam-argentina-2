@@ -7,7 +7,7 @@ public class Base : MonoBehaviour
 	// Start is called ;before the first frame update
 	public float health;
     public Transform healthBar;
-	public Image uihealth;
+	public Image uiHealth;
     public GameObject explosion;
 
 	GameManager gameManager;
@@ -20,13 +20,13 @@ public class Base : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		uihealth.fillAmount = health / 100;
+		uiHealth.fillAmount = health / 100;
 	}
 	public void GetHit(int damage)
 	{
 		health -= damage;
         
-		if (health <= 0)
+		if (health < 0)
 		{
             // Create explosion on base positon
             Instantiate(explosion, transform.position, Quaternion.identity);
@@ -36,7 +36,6 @@ public class Base : MonoBehaviour
 
             // Destroy base
             Destroy(gameObject);
-			
 		}
 	}
 
