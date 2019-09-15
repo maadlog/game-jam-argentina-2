@@ -14,7 +14,7 @@ public class Base : MonoBehaviour
 	void Start()
 	{
 		gameManager = GameManager.getGameManager();
-		healthBar.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 2, 0);
+		healthBar.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 4, 0);
 	}
 
 	// Update is called once per frame
