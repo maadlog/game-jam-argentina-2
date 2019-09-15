@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,19 +30,40 @@ public class Player : MonoBehaviour
 		Shoot();
 	}
 
+    float timeShooting = 0f;
+    float timeShootingLimit = 1f;
 	void Shoot()
 	{
 		if (shootTimer < 0)
 		{
 			if (Input.GetKey(KeyCode.Space))
 			{
-				Instantiate(bullet, gun.transform.position, transform.rotation);
+                timeShooting += Time.deltaTime;
+                if (timeShooting > timeShootingLimit)
+                {
+                    timeShooting = timeShootingLimit;
+                }
+
+                var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
+                var intDisplace = UnityEngine.Random.Range(0f, 2f) * sign;
+
+                Debug.Log(timeShooting/timeShootingLimit);
+                var disp = intDisplace * (timeShooting / timeShootingLimit);
+                
+                var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
+                var trasn = gun.transform.position + displace;
+                Instantiate(bullet, trasn, transform.rotation);
 				shootTimer = shootColdDown;
-			}
+			} else
+            {
+                timeShooting = 0f;
+            }
+
 		}
 		else
 		{
 			shootTimer -= Time.deltaTime;
 		}
 	}
+
 }
