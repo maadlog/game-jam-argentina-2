@@ -70,8 +70,9 @@ public class Player : MonoBehaviour
 				timeShooting += Time.deltaTime;
 				if (timeShooting > timeShootingLimit)
 				{
-					timeShooting = timeShootingLimit;
+					timeShooting = 0;
                     shootColdDown = staggeredCooldown;
+                    isStaggered = true;
 				}
 
 				var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
@@ -95,19 +96,18 @@ public class Player : MonoBehaviour
 
 				shootTimer = shootColdDown;
 			}
-			else
-			{
-                timeShooting -= Time.deltaTime;
-                if (timeShooting <= 0)
-                {
-                    timeShooting = 0;
-                }
-            }
+			
 		}
 		else
 		{
 			shootTimer -= Time.deltaTime;
-		}
+            timeShooting -= Time.deltaTime;
+            if (timeShooting <= 0)
+            {
+                timeShooting = 0;
+                isStaggered = false;
+            }
+        }
 	}
 
 }
