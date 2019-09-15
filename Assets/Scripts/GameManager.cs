@@ -8,18 +8,19 @@ public class GameManager : MonoBehaviour
 {
 	public float timeToMoveToMenu = 2f;
 	public Text scoreText;
+	public Text lostText;
 
 	int score = 0;
-	GameManager gameManager;
+	static GameManager gameManager;
 	float menuTimer;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-        // set time to timer
-        menuTimer = timeToMoveToMenu;
+		// set time to timer
+		menuTimer = timeToMoveToMenu;
 
-        // make it singleton
+		// make it singleton
 		if (gameManager == null)
 		{
 			gameManager = this;
@@ -29,6 +30,9 @@ public class GameManager : MonoBehaviour
 		{
 			Destroy(this);
 		}
+
+		UpdateScore(0);
+		lostText.enabled = false;
 	}
 
 	// Update is called once per frame
@@ -37,10 +41,15 @@ public class GameManager : MonoBehaviour
 
 	}
 
+	public static GameManager getGameManager()
+	{
+		return gameManager;
+	}
+
 	public void UpdateScore(int score)
 	{
 		this.score += score;
-		scoreText.text = this.score.ToString();
+		scoreText.text = "Score: " + this.score.ToString();
 	}
 
 	public void ChangeLevel()
@@ -50,13 +59,19 @@ public class GameManager : MonoBehaviour
 
 	public void LostLevel()
 	{
+		// show message
+		lostText.enabled = true;
+
 		// player cant move
-        
+
 		// go to menu after a while
-        if(menuTimer < 0) {
-            SceneManager.LoadScene("Menu");
-        } else {
-            menuTimer -= Time.deltaTime;
-        }
+		if (menuTimer < 0)
+		{
+			SceneManager.LoadScene("Menu");
+		}
+		else
+		{
+			menuTimer -= Time.deltaTime;
+		}
 	}
 }

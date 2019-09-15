@@ -67,8 +67,8 @@ public class Player : MonoBehaviour
 
                 foreach (Transform gun in guns)
                 {
-                    var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
-				    var trasn = gun.transform.position + displace;
+                    var displace = gun.TransformVector(new Vector3(0, disp, 0));
+				    var trasn = gun.position + displace;
 				    Instantiate(bullet, trasn, transform.rotation);
                 }
 
