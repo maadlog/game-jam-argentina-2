@@ -9,6 +9,7 @@ public class Base : MonoBehaviour
     public Transform healthBar;
 	public Image uiHealth;
     public GameObject explosion;
+   
 
 	GameManager gameManager;
 	void Start()
@@ -33,10 +34,14 @@ public class Base : MonoBehaviour
 
             // Lost Level on game manager
             gameManager.LostLevel();
-
+            gameManager.PlaySoundExplosion();
             // Destroy base
             Destroy(gameObject);
+
+           
 		}
+
 	}
 
+  
 }
