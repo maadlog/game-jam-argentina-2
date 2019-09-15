@@ -1469,6 +1469,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8737942957686502754, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_Name
+      value: Gun Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737942957686502757, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737942957686502757, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737942959433159634, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8737942959433159638, guid: c15ae4352569c3646916cafff3566d76,
         type: 3}
       propertyPath: guns.Array.size
