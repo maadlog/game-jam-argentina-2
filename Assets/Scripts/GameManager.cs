@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour
 	float menuTimer;
 	bool activateFadeOff = false;
 	GameObject fadeOff;
-
-	// Start is called before the first frame update
-	void Start()
+    public AudioSource explotionSound;
+    // Start is called before the first frame update
+    void Start()
 	{
 
 
@@ -91,8 +91,11 @@ public class GameManager : MonoBehaviour
     {
         this.refugees += counter;
         CounterText.text = refugees.ToString() + "/" + max_refugees.ToString() + " Refugees";
-
     }
 
+   public  void PlaySoundExplosion()
+    {
+        explotionSound.Play();
 
+    }
 }
