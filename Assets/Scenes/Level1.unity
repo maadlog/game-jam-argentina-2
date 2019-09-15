@@ -850,7 +850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff68cea4c1ac5d4682349c4f3ec06d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 100
   healthBar: {fileID: 1272610936}
   uihealth: {fileID: 222570632}
   explosion: {fileID: 2744586489874948479, guid: dcd3a8259f94ebc47b99666aaff3f589,
@@ -1285,6 +1285,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8737942957686502754, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_Name
+      value: Gun Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737942957686502757, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737942957686502757, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8737942959433159634, guid: c15ae4352569c3646916cafff3566d76,
         type: 3}
       propertyPath: m_Enabled
@@ -1355,21 +1370,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FlipY
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8737942957686502754, guid: c15ae4352569c3646916cafff3566d76,
-        type: 3}
-      propertyPath: m_Name
-      value: Gun Left
-      objectReference: {fileID: 0}
-    - target: {fileID: 8737942957686502757, guid: c15ae4352569c3646916cafff3566d76,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.035
-      objectReference: {fileID: 0}
-    - target: {fileID: 8737942957686502757, guid: c15ae4352569c3646916cafff3566d76,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8737942959433159637, guid: c15ae4352569c3646916cafff3566d76, type: 3}
