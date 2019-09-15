@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
 
 				var disp = intDisplace * proportion;
 
-				if (proportion > 0.2)
+				if (proportion > 0.07)
 				{
 					cameraAnimator.Play("Shoot");
 				}
