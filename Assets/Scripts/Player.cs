@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -131,7 +131,6 @@ public class Player : MonoBehaviour
     void PlayShootSound()
     {
        var i = random.Next(0, ShootSounds.Length);
-        Debug.Log("sound " + i);
         ShootSounds[i].Play();
     }
 

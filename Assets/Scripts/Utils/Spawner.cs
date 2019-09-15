@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour
 	public GameObject gameObjectToSpawn;
 	public float timeToSpawn = 2f;
 
+    
+
 	int spawnPointIndex;
 	float timerToSpawn;
     
@@ -24,7 +26,17 @@ public class Spawner : MonoBehaviour
 		{
 			// select random spawn point index
 			spawnPointIndex = Random.Range(0, spawnPoints.Length);
-			Instantiate(gameObjectToSpawn, spawnPoints[spawnPointIndex].position, Quaternion.identity);
+
+
+            //Generate random point in sphere centered on this Spawner
+            Vector3 offset = Random.onUnitSphere;
+            offset.z = 0;
+            offset = offset.normalized * 15f; // Normalize direction and get distance
+
+            var a = spawnPoints[spawnPointIndex].position + offset;
+            a.z = 0;
+
+            Instantiate(gameObjectToSpawn, a, Quaternion.identity);
 
 			// Reset timer
             timerToSpawn = timeToSpawn;
