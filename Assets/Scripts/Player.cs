@@ -13,10 +13,11 @@ public class Player : MonoBehaviour
 	public GameObject bullet;
 
 	float shootTimer;
-
+	Animator animator;
 	// Start is called before the first frame update
 	void Start()
 	{
+		animator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
 		shootTimer = shootColdDown;
 	}
 
@@ -30,34 +31,41 @@ public class Player : MonoBehaviour
 		Shoot();
 	}
 
-    float timeShooting = 0f;
-    float timeShootingLimit = 1f;
+	float timeShooting = 0f;
+	float timeShootingLimit = 1f;
 	void Shoot()
 	{
 		if (shootTimer < 0)
 		{
 			if (Input.GetKey(KeyCode.Space))
 			{
-                timeShooting += Time.deltaTime;
-                if (timeShooting > timeShootingLimit)
-                {
-                    timeShooting = timeShootingLimit;
-                }
+				timeShooting += Time.deltaTime;
+				if (timeShooting > timeShootingLimit)
+				{
+					timeShooting = timeShootingLimit;
+				}
 
-                var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
-                var intDisplace = UnityEngine.Random.Range(0f, 2f) * sign;
+				var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
+				var intDisplace = UnityEngine.Random.Range(0f, 2f) * sign;
 
-                Debug.Log(timeShooting/timeShootingLimit);
-                var disp = intDisplace * (timeShooting / timeShootingLimit);
-                
-                var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
-                var trasn = gun.transform.position + displace;
-                Instantiate(bullet, trasn, transform.rotation);
+				float proportion = timeShooting / timeShootingLimit;
+
+				var disp = intDisplace * proportion;
+
+				if (proportion > 0.2)
+				{
+					animator.Play("Shoot");
+				}
+
+				var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
+				var trasn = gun.transform.position + displace;
+				Instantiate(bullet, trasn, transform.rotation);
 				shootTimer = shootColdDown;
-			} else
-            {
-                timeShooting = 0f;
-            }
+			}
+			else
+			{
+				timeShooting = 0f;
+			}
 
 		}
 		else
