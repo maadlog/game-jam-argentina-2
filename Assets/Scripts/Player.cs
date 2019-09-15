@@ -59,16 +59,19 @@ public class Player : MonoBehaviour
 
 	float timeShooting = 0f;
 	float timeShootingLimit = 1f;
+    float staggeredCooldown = 2f;
+    bool isStaggered = false;
 	void Shoot()
 	{
 		if (shootTimer < 0)
 		{
-			if (Input.GetKey(KeyCode.Space))
+			if (Input.GetKey(KeyCode.Space) && !isStaggered)
 			{
 				timeShooting += Time.deltaTime;
 				if (timeShooting > timeShootingLimit)
 				{
 					timeShooting = timeShootingLimit;
+                    shootColdDown = staggeredCooldown;
 				}
 
 				var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
@@ -94,8 +97,12 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
-				timeShooting = 0f;
-			}
+                timeShooting -= Time.deltaTime;
+                if (timeShooting <= 0)
+                {
+                    timeShooting = 0;
+                }
+            }
 		}
 		else
 		{
