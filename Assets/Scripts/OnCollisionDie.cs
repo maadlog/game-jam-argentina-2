@@ -10,12 +10,14 @@ public interface ICanDie
 
 public class OnCollisionDie : MonoBehaviour
 {
-    public ParticleSystem enemyHit;
+	public ParticleSystem enemyHit;
 	GameManager gameManager;
+	AudioSource audioSource;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		audioSource = GetComponent<AudioSource>();
 		gameManager = GameManager.getGameManager();
 	}
 
@@ -28,8 +30,9 @@ public class OnCollisionDie : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        Instantiate(enemyHit, transform.position, Quaternion.identity);
-        
+		Instantiate(enemyHit, transform.position, Quaternion.identity);
+		gameManager.PlaySoundEnemyDeath();
+
 		// collision with base
 		if (collision.CompareTag("Base"))
 		{

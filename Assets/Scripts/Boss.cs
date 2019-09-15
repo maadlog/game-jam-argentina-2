@@ -35,10 +35,13 @@ public class Boss : MonoBehaviour
 
     void MoveToFixedPoints()
 	{
-        // Rotate to target
-		Vector3 dir = baseTarget.transform.position - transform.position;
-		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		if(baseTarget != null) {
+			// Rotate to target
+			Vector3 dir = baseTarget.transform.position - transform.position;
+			float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		}
+
 
         if (Vector2.Distance(transform.position, target.position) > 0.2f) {
             animator.SetBool("isMoving", true);
