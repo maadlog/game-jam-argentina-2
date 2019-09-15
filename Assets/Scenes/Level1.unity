@@ -2061,7 +2061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   healthBar: {fileID: 1272610936}
-  uiHealth: {fileID: 0}
+  uiHealth: {fileID: 222570632}
   explosion: {fileID: 2744586489874948479, guid: dcd3a8259f94ebc47b99666aaff3f589,
     type: 3}
 --- !u!70 &829810017
