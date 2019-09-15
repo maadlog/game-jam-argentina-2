@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
             {
                 staggeredTimer = 0;
                 isStaggered = false;
+                animator.SetBool("isStaggered", false);
 
             }
             return;
@@ -85,7 +86,8 @@ public class Player : MonoBehaviour
 				{
 					timeShooting = timeShootingLimit;
                     isStaggered = true;
-				}
+                    animator.SetBool("isStaggered", true);
+                }
 
 				var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
 				
