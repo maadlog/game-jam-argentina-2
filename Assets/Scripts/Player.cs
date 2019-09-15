@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
         }
         if (shootTimer < 0)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) || Input.GetAxisRaw("Fire1") == 1)
             {
                 timeShooting += Time.deltaTime;
                 if (timeShooting > timeShootingLimit)
