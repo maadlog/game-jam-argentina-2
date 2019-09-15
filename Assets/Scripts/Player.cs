@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
             // handle foward or backwards
             float moveVertical = vertical;
             transform.position += moveVertical * transform.right * movementSpeed * Time.deltaTime;
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x,-26.5f, 26.5f), Mathf.Clamp(transform.position.y,-11,11));
         }
         else
         {
