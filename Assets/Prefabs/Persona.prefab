@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6280549433616215308}
   - component: {fileID: 1147086712}
   - component: {fileID: 2525015868183134669}
+  - component: {fileID: 4386347831339759923}
   m_Layer: 0
   m_Name: Persona
   m_TagString: Untagged
@@ -167,5 +168,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d9875ef86f0388478d743b4452f16d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4386347831339759923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865137563816867525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563dc15928d71244091c97602a5f8b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

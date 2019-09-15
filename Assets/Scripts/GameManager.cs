@@ -9,8 +9,11 @@ public class GameManager : MonoBehaviour
 	public float timeToMoveToMenu = 2f;
 	public Text scoreText;
 	public Text lostText;
+    public Text CounterText;
 
 	int score = 0;
+    int refugees = 0;
+    int max_refugees = 15;
 	static GameManager gameManager;
 	float menuTimer;
 	bool activateFadeOff = false;
@@ -63,22 +66,33 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene("Level2");
 	}
 
-	public void LostLevel()
-	{
+    public void LostLevel()
+    {
 
-		// show message
-		lostText.enabled = true;
+        // show message
+        lostText.enabled = true;
 
-		// player cant move
+        // player cant move
 
-		// go to menu after a while
-		if (menuTimer < 0)
-		{
-			SceneManager.LoadScene("Menu");
-		}
-		else
-		{
-			menuTimer -= Time.deltaTime;
-		}
-	}
+        // go to menu after a while
+        if (menuTimer < 0)
+        {
+            SceneManager.LoadScene("Menu");
+        }
+        else
+        {
+            menuTimer -= Time.deltaTime;
+        }
+    }
+
+
+
+    public void UpdateCounter(int counter)
+    {
+        this.refugees += counter;
+        CounterText.text = refugees.ToString() + "/" + max_refugees.ToString() + " Refugees";
+
+    }
+
+
 }
