@@ -9,8 +9,6 @@ public class Player : MonoBehaviour
 	public float rotateSpeed = 1f;
 	public float shootColdDown = 2f;
 
-	public Transform[] guns;
-	public GameObject gunLeft;
 	public GameObject bullet;
 
 	float shootTimer;
@@ -50,7 +48,7 @@ public class Player : MonoBehaviour
 			// handle foward or backwards
 			float moveVertical = vertical;
 			transform.position += moveVertical * transform.right * movementSpeed * Time.deltaTime;
-		}
+		} 
 		else
 		{
 			// set move boolean to state idle
@@ -73,28 +71,25 @@ public class Player : MonoBehaviour
 					timeShooting = timeShootingLimit;
 				}
 
-				var sign = (int)Math.Round(UnityEngine.Random.Range(-0.4f, 0.4f), 0);
-				var intDisplace = UnityEngine.Random.Range(0f, 2f) * sign;
-
+				var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
+				
 				float proportion = timeShooting / timeShootingLimit;
 
-				var disp = intDisplace * proportion;
-
-				if (proportion > 0.07)
+                if (proportion > 0.4)
 				{
 					cameraAnimator.Play("Shoot");
 				}
-
-				foreach (Transform gun in guns)
+                
+				foreach (GameObject gun in GameObject.FindGameObjectsWithTag("Gun"))
 				{
-					var displace = gun.TransformVector(new Vector3(0, disp, 0));
-					var trasn = gun.position + displace;
+                    var intDisplace = UnityEngine.Random.Range(0f, .1f) * sign;
+                    var disp = intDisplace * proportion;
+                    Debug.Log(disp);
+                    var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
+					var trasn = gun.transform.position + displace;
 					Instantiate(bullet, trasn, transform.rotation);
 				}
 
-				// var displace = gunLeft.transform.TransformVector(new Vector3(0, disp, 0));
-				// var trasn = gunLeft.transform.position + displace;
-				// Instantiate(bullet, trasn, transform.rotation);
 				shootTimer = shootColdDown;
 			}
 			else
