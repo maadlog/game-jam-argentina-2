@@ -8,6 +8,7 @@ public class Base : MonoBehaviour
 	public float health;
     public Transform healthBar;
 	public Image uihealth;
+    public GameObject explosion;
 
 	GameManager gameManager;
 	void Start()
@@ -27,7 +28,15 @@ public class Base : MonoBehaviour
         
 		if (health <= 0)
 		{
-			gameManager.LostLevel();
+            // Create explosion on base positon
+            Instantiate(explosion, transform.position, Quaternion.identity);
+
+            // Lost Level on game manager
+            gameManager.LostLevel();
+
+            // Destroy base
+            Destroy(gameObject);
+			
 		}
 	}
 
