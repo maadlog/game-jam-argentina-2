@@ -61,24 +61,36 @@ public class Player : MonoBehaviour
 	float timeShootingLimit = 1f;
     float staggeredCooldown = 2f;
     bool isStaggered = false;
+    float staggeredTimer = 0f;
+   
 	void Shoot()
 	{
+        if (isStaggered)
+        {
+            staggeredTimer += Time.deltaTime;
+            if (staggeredTimer >= staggeredCooldown)
+            {
+                staggeredTimer = 0;
+                isStaggered = false;
+
+            }
+            return;
+        }
 		if (shootTimer < 0)
 		{
-			if (Input.GetKey(KeyCode.Space) && !isStaggered)
+			if (Input.GetKey(KeyCode.Space))
 			{
 				timeShooting += Time.deltaTime;
 				if (timeShooting > timeShootingLimit)
 				{
-					timeShooting = 0;
-                    shootColdDown = staggeredCooldown;
+					timeShooting = timeShootingLimit;
                     isStaggered = true;
 				}
 
 				var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
 				
 				float proportion = timeShooting / timeShootingLimit;
-
+                
                 if (proportion > 0.4)
 				{
 					cameraAnimator.Play("Shoot");
@@ -88,7 +100,7 @@ public class Player : MonoBehaviour
 				{
                     var intDisplace = UnityEngine.Random.Range(0f, .1f) * sign;
                     var disp = intDisplace * proportion;
-                    Debug.Log(disp);
+                    
                     var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
 					var trasn = gun.transform.position + displace;
 					Instantiate(bullet, trasn, transform.rotation);
@@ -96,17 +108,15 @@ public class Player : MonoBehaviour
 
 				shootTimer = shootColdDown;
 			}
+            else
+            {
+                timeShooting = 0;
+            }
 			
 		}
 		else
 		{
 			shootTimer -= Time.deltaTime;
-            timeShooting -= Time.deltaTime;
-            if (timeShooting <= 0)
-            {
-                timeShooting = 0;
-                isStaggered = false;
-            }
         }
 	}
 
