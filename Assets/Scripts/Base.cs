@@ -10,7 +10,6 @@ public class Base : MonoBehaviour
 	public Image uiHealth;
     public GameObject explosion;
    
-
 	GameManager gameManager;
 	void Start()
 	{
@@ -37,8 +36,6 @@ public class Base : MonoBehaviour
             gameManager.PlaySoundExplosion();
             // Destroy base
             Destroy(gameObject);
-
-           
 		}
 
 	}

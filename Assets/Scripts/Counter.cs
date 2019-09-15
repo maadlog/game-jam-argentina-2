@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
-    public GameManager miGameManager;// = GameManager.getGameManager();
+    public GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        miGameManager = GameManager.getGameManager();
+        gameManager = GameManager.getGameManager();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Base"))
         {
-            miGameManager.UpdateCounter(1);
+            gameManager.UpdateCounter(1);
         }
 
     }

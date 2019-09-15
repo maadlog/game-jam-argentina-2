@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Text CounterText;
 
 	int score = 0;
-    int refugees = 0;
+    int refugees = 14;
     int max_refugees = 15;
 	static GameManager gameManager;
 	float menuTimer;
@@ -20,10 +20,8 @@ public class GameManager : MonoBehaviour
 	GameObject fadeOff;
     public AudioSource explotionSound;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
 	{
-
-
 		// set time to timer
 		menuTimer = timeToMoveToMenu;
 
@@ -63,7 +61,7 @@ public class GameManager : MonoBehaviour
 
 	public void ChangeLevel()
 	{
-		SceneManager.LoadScene("Level2");
+		SceneManager.LoadScene(GameObject.FindObjectOfType<NextLevel>().nextLevel);
 	}
 
     public void LostLevel()
@@ -85,17 +83,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
     public void UpdateCounter(int counter)
     {
         this.refugees += counter;
-        CounterText.text = refugees.ToString() + "/" + max_refugees.ToString() + " Refugees";
+        CounterText.text = refugees.ToString() + "/" + max_refugees.ToString();
+		if(this.refugees >= GameObject.FindObjectOfType<NextLevel>().counterLimit) {
+			ChangeLevel();
+		}
     }
 
    public  void PlaySoundExplosion()
     {
         explotionSound.Play();
-
     }
 }
