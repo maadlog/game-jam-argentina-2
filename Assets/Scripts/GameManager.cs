@@ -13,10 +13,14 @@ public class GameManager : MonoBehaviour
 	int score = 0;
 	static GameManager gameManager;
 	float menuTimer;
+	bool activateFadeOff = false;
+	GameObject fadeOff;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+
+
 		// set time to timer
 		menuTimer = timeToMoveToMenu;
 
@@ -38,7 +42,9 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if(activateFadeOff) {
 
+		}
 	}
 
 	public static GameManager getGameManager()
@@ -59,6 +65,7 @@ public class GameManager : MonoBehaviour
 
 	public void LostLevel()
 	{
+
 		// show message
 		lostText.enabled = true;
 

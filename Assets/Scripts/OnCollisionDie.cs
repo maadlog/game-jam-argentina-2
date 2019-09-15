@@ -10,6 +10,7 @@ public interface ICanDie
 
 public class OnCollisionDie : MonoBehaviour
 {
+    public ParticleSystem enemyHit;
 	GameManager gameManager;
 
 	// Start is called before the first frame update
@@ -27,6 +28,8 @@ public class OnCollisionDie : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+        Instantiate(enemyHit, transform.position, Quaternion.identity);
+        
 		// collision with base
 		if (collision.CompareTag("Base"))
 		{
