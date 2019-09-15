@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 431929991}
   m_Layer: 0
   m_Name: Gun Right
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1469,11 +1469,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 8737942959433159634, guid: c15ae4352569c3646916cafff3566d76,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8737942959433159638, guid: c15ae4352569c3646916cafff3566d76,
         type: 3}
       propertyPath: guns.Array.size
@@ -1504,10 +1499,35 @@ PrefabInstance:
       propertyPath: guns.Array.data[1]
       value: 
       objectReference: {fileID: 431929991}
+    - target: {fileID: 8737942959433159634, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737942957686502754, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_Name
+      value: Gun Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737942957686502754, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_TagString
+      value: Gun
+      objectReference: {fileID: 0}
     - target: {fileID: 8737942957665556886, guid: c15ae4352569c3646916cafff3566d76,
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737942957686502757, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737942957686502757, guid: c15ae4352569c3646916cafff3566d76,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 8737942957665556889, guid: c15ae4352569c3646916cafff3566d76,
         type: 3}
@@ -1539,21 +1559,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FlipY
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8737942957686502754, guid: c15ae4352569c3646916cafff3566d76,
-        type: 3}
-      propertyPath: m_Name
-      value: Gun Left
-      objectReference: {fileID: 0}
-    - target: {fileID: 8737942957686502757, guid: c15ae4352569c3646916cafff3566d76,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 8737942957686502757, guid: c15ae4352569c3646916cafff3566d76,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.11
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8737942959433159637, guid: c15ae4352569c3646916cafff3566d76, type: 3}

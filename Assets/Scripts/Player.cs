@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 			// handle foward or backwards
 			float moveVertical = vertical;
 			transform.position += moveVertical * transform.right * movementSpeed * Time.deltaTime;
-		} 
+		}
 		else
 		{
 			// set move boolean to state idle
