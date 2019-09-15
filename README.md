@@ -11,3 +11,4 @@ Pending items after game jam 9-15-2019
 + More weapon types
 + Collisions on the ship
 + Vary ship for lvl 3
++ Volumes for FX and background music
