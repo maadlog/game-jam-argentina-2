@@ -1,24 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-	public Transform[] spawnPoints;
+
 	public GameObject gameObjectToSpawn;
 	public float timeToSpawn = 2f;
+    public int spawnDistance = 12;
 
-    
+    private Vector3[] spawnPoints; 
+	private float timerToSpawn;
 
-	int spawnPointIndex;
-	float timerToSpawn;
-    
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
 	{
-
+        InitializeSpawnPoints();
 	}
 
+    private int spawnPointIndex;
 	// Update is called once per frame
 	void Update()
 	{
@@ -28,15 +29,12 @@ public class Spawner : MonoBehaviour
 			spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
 
-            //Generate random point in sphere centered on this Spawner
-            Vector3 offset = Random.onUnitSphere;
-            offset.z = 0;
-            offset = offset.normalized * 15f; // Normalize direction and get distance
-
-            var a = spawnPoints[spawnPointIndex].position + offset;
-            a.z = 0;
-
-            Instantiate(gameObjectToSpawn, a, Quaternion.identity);
+            //Generate random point
+            var offset = GetRandomOffset2D(6);
+            // Add random point to the spawnerPoint to get the new position
+            var spawnPosition = spawnPoints[spawnPointIndex] + offset;
+            
+            Instantiate(gameObjectToSpawn, spawnPosition, Quaternion.identity);
 
 			// Reset timer
             timerToSpawn = timeToSpawn;
@@ -46,4 +44,30 @@ public class Spawner : MonoBehaviour
 			timerToSpawn -= Time.deltaTime;
 		}
 	}
+
+    //Generates a random array of Points arround the spawner
+    // called only once on start
+    private void InitializeSpawnPoints()
+    {
+        var totalPoints = Random.Range(4, 7);
+        spawnPoints = Enumerable.Range(0, totalPoints).Select(i =>
+        {
+            return GetRandomOffset2D(spawnDistance);
+        }).ToArray();
+    }
+
+    /// <summary>
+    /// Generates a Random Vector3 with
+    ///     a size of offsetDistance,
+    ///     a random direction,
+    ///     and z = 0
+    /// </summary>
+    /// <param name="offsetDistance">Result's size</param>
+    /// <returns>Vector3</returns>
+    private Vector3 GetRandomOffset2D(int offsetDistance = 1)
+    {
+        Vector3 offset = Random.onUnitSphere;
+        offset.z = 0;
+        return offset.normalized * offsetDistance;
+    }
 }

@@ -327,6 +327,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
+        type: 3}
+      propertyPath: gameObjectToSpawn
+      value: 
+      objectReference: {fileID: 2551702742639843095, guid: ae754bf3cb4751a46b2a9eae77d19bdb,
+        type: 3}
     - target: {fileID: 3698320412574477346, guid: f3b0cc02e8d13764bafccb797acb568c,
         type: 3}
       propertyPath: m_Name
@@ -3902,33 +3908,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702911274}
   m_CullTransparentMesh: 0
---- !u!1 &1773610326 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3698320412574477346, guid: f3b0cc02e8d13764bafccb797acb568c,
-    type: 3}
-  m_PrefabInstance: {fileID: 81673638}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1773610327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773610326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 623f2fd927853b24eb9f0b819bc54620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 1561050329}
-  - {fileID: 1377402829}
-  - {fileID: 1068244367}
-  - {fileID: 2077253669}
-  - {fileID: 2121657313}
-  gameObjectToSpawn: {fileID: 2551702742639843095, guid: ae754bf3cb4751a46b2a9eae77d19bdb,
-    type: 3}
-  timeToSpawn: 2
 --- !u!4 &1840957768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4998484078767814073, guid: e65f505f31eeb644892ac7fc41c9185e,

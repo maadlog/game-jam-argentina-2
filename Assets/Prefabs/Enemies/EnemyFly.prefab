@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6902593553982218013}
   - component: {fileID: 6902593553982218012}
   - component: {fileID: 6902593553982217986}
-  - component: {fileID: 6902593553982218015}
   - component: {fileID: 7750002999909186601}
   - component: {fileID: 8411798187547251289}
   - component: {fileID: 8060723013813304080}
+  - component: {fileID: -282202694773939823}
   m_Layer: 0
   m_Name: EnemyFly
   m_TagString: Untagged
@@ -121,19 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 2
   stopped: 0
---- !u!114 &6902593553982218015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6902593553982217985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f868cf5eb37464440be77fbcb7aa117f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotSpeed: 90
 --- !u!114 &7750002999909186601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,3 +169,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
+--- !u!114 &-282202694773939823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902593553982217985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3446c35ecd34874a8643c4efeb88b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotSpeed: 90
+  tagToFace: Base
+  instantaneous: 0
