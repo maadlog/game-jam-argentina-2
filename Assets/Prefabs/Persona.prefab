@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 7087541954555910255}
   - component: {fileID: 4104904889541474426}
   - component: {fileID: 1534834578312154318}
-  - component: {fileID: -3929701494343429913}
   - component: {fileID: -6280549433616215308}
   - component: {fileID: 1147086712}
   - component: {fileID: 2525015868183134669}
   - component: {fileID: 4386347831339759923}
+  - component: {fileID: 3679849367029109479}
   m_Layer: 0
   m_Name: Persona
   m_TagString: Untagged
@@ -105,19 +105,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-3929701494343429913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865137563816867525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f868cf5eb37464440be77fbcb7aa117f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotSpeed: 100
 --- !u!114 &-6280549433616215308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,3 +170,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+--- !u!114 &3679849367029109479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865137563816867525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3446c35ecd34874a8643c4efeb88b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotSpeed: 90
+  tagToFace: Base
+  instantaneous: 1
