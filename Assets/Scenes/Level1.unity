@@ -2699,6 +2699,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3698320412574477346, guid: f3b0cc02e8d13764bafccb797acb568c,
+        type: 3}
+      propertyPath: m_Name
+      value: Spawner
+      objectReference: {fileID: 0}
     - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
         type: 3}
       propertyPath: gameObjectToSpawn
@@ -2714,11 +2719,6 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnDistance
       value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3698320412574477346, guid: f3b0cc02e8d13764bafccb797acb568c,
-        type: 3}
-      propertyPath: m_Name
-      value: Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 1241334525707778001, guid: f3b0cc02e8d13764bafccb797acb568c,
         type: 3}
@@ -3019,22 +3019,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 689446364, guid: c15ae4352569c3646916cafff3566d76, type: 3}
-      propertyPath: m_Volume
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 689446365, guid: c15ae4352569c3646916cafff3566d76, type: 3}
-      propertyPath: m_Volume
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 689446366, guid: c15ae4352569c3646916cafff3566d76, type: 3}
-      propertyPath: m_Volume
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 689446367, guid: c15ae4352569c3646916cafff3566d76, type: 3}
-      propertyPath: m_Volume
-      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c15ae4352569c3646916cafff3566d76, type: 3}

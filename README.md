@@ -2,7 +2,6 @@
 
 Pending items after game jam 9-15-2019
 + Make game winnable
-+ Add SoundFX for: Bug squash
 + Level transitions
 + Menu Slider
 + Coherent z indexes for game objects
@@ -12,5 +11,6 @@ Pending items after game jam 9-15-2019
 + Vary ship for lvl 3
 + Volumes for FX and background music
 + Turret
++ Pause Menu
 
 Please commit everything to development and create further branches from there

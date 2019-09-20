@@ -27,17 +27,12 @@ public class OnCollisionDie : MonoBehaviour
 
 	}
 
-
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		Instantiate(enemyHit, transform.position, Quaternion.identity);
-		gameManager.PlaySoundEnemyDeath();
-
 		// collision with base
 		if (collision.CompareTag("Base"))
 		{
-			this.GetComponent<EnemyMovement>().stopped = true;
-			GameObject.Destroy(this.gameObject);
+			EnemyDeath();
 			GameObject.FindObjectOfType<Base>().GetHit(10);
 		}
 
@@ -45,9 +40,16 @@ public class OnCollisionDie : MonoBehaviour
 		if (collision.CompareTag("Bullet"))
 		{
 			gameManager.UpdateScore(1);
-			GameObject.Destroy(this.gameObject);
+			EnemyDeath();
 			GameObject.Destroy(collision.gameObject);
 		}
 	}
 
+	private void EnemyDeath()
+	{
+		Instantiate(enemyHit, transform.position, Quaternion.identity);
+		gameManager.PlaySoundEnemyDeath();
+		GameObject.Destroy(this.gameObject);
+
+	}
 }

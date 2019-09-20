@@ -70,6 +70,3 @@ public class FaceTaggedObject : MonoBehaviour
 
     }
 }
-
-
-
