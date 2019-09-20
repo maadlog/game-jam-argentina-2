@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject prefab;
@@ -23,10 +22,15 @@ public class EnemySpawner : MonoBehaviour
 
     int spawnedInThisGeneration;
     int deltaNextGeneration = 10;
-
+    bool movingSpawn = false;
     // Update is called once per frame
     void Update()
     {
+        if (movingSpawn)
+        {
+            awaitAnimationForSpawnPoint();
+            return;
+        }
         enemyDelay -= Time.deltaTime;
         
         if (enemyDelay <= 0)
@@ -38,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
             if (spawnedInThisGeneration >= deltaNextGeneration)
             {
                 ResetGenerationCounters();
-                MoveSpawnPoint();
+                StartMoveSpawnPoint();
             }
             else
             {
@@ -47,14 +51,31 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void MoveSpawnPoint()
+    private void awaitAnimationForSpawnPoint()
     {
-        //Generate random point in sphere centered on this Spawner
-        Vector3 newPosition = Random.onUnitSphere;
-        newPosition.z = 0;
-        newPosition = newPosition.normalized * spawnPoint.transform.position.magnitude; // Normalize direction and get distance
+        if (spawnPoint.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Dissapear"))
+        {
+            // Avoid any reload.
+        }
+        else
+        {
+            //Generate random point in sphere centered on this Spawner
+            Vector3 newPosition = Random.onUnitSphere;
+            newPosition.z = 0;
+            newPosition = newPosition.normalized * spawnPoint.transform.position.magnitude; // Normalize direction and get distance
 
-        spawnPoint.transform.position = newPosition;
+            spawnPoint.transform.position = newPosition;
+            spawnPoint.GetComponent<Animator>().Play("Appear");
+            movingSpawn = false;
+        }
+
+    }
+
+    private void StartMoveSpawnPoint()
+    {
+        movingSpawn = true;
+        spawnPoint.GetComponent<Animator>().Play("Dissapear");
+        
     }
 
     private void ResetGenerationCounters()
