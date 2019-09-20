@@ -1149,6 +1149,7 @@ GameObject:
   - component: {fileID: 558639856}
   - component: {fileID: 558639855}
   - component: {fileID: 558639858}
+  - component: {fileID: 558639859}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1240,6 +1241,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &558639859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558639854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874f53a9bad524c64b3e2ad35880acc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &598313870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4998484078767814073, guid: e65f505f31eeb644892ac7fc41c9185e,
@@ -2699,6 +2712,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3698320412574477346, guid: f3b0cc02e8d13764bafccb797acb568c,
+        type: 3}
+      propertyPath: m_Name
+      value: Spawner
+      objectReference: {fileID: 0}
     - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
         type: 3}
       propertyPath: gameObjectToSpawn
@@ -2714,11 +2732,6 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnDistance
       value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3698320412574477346, guid: f3b0cc02e8d13764bafccb797acb568c,
-        type: 3}
-      propertyPath: m_Name
-      value: Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 1241334525707778001, guid: f3b0cc02e8d13764bafccb797acb568c,
         type: 3}
@@ -3038,6 +3051,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c15ae4352569c3646916cafff3566d76, type: 3}
+--- !u!1 &1926203485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1926203486}
+  m_Layer: 0
+  m_Name: EnemiesSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1926203486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926203485}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1950473701 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4998484078767814073, guid: e65f505f31eeb644892ac7fc41c9185e,
@@ -3325,6 +3368,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6902593553982217985, guid: 40331febda82f3f459fad539a6822476,
         type: 3}
+    - target: {fileID: 8652474053474547403, guid: af80003ea68b8424cb1ec2c3be32774f,
+        type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1926203485}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af80003ea68b8424cb1ec2c3be32774f, type: 3}
 --- !u!1 &2121657312

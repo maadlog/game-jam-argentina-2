@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject prefab;
+    public GameObject spawnPoint;
 
     float enemyRate = 5; // 1 Enemies generated in 5 secs
     float enemyDelay = 1; // Time delay to generate enemy
@@ -43,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
 
             GameObject newEnemy = Instantiate(
                 prefab //Enemy prefab
-                , transform.position + offset //Initial Position
+                , spawnPoint.transform.position + offset //Initial Position
                 , Quaternion.identity); // Dont Rotate
 
             EnemyMovement newEnemyMov;
