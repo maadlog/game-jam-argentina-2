@@ -866,6 +866,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e65f505f31eeb644892ac7fc41c9185e, type: 3}
+--- !u!1 &276484221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8737942959433159635, guid: c15ae4352569c3646916cafff3566d76,
+    type: 3}
+  m_PrefabInstance: {fileID: 1894298072}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &303388395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1156,7 @@ GameObject:
   - component: {fileID: 558639855}
   - component: {fileID: 558639858}
   - component: {fileID: 558639859}
+  - component: {fileID: 558639860}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1230,7 +1237,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558639854}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 43aaa0970dfb81443a115d125433ce52, type: 2}
   m_CullingMode: 0
@@ -1248,11 +1255,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558639854}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 874f53a9bad524c64b3e2ad35880acc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &558639860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558639854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71c120daedcd43c592d0141b97665b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackingObjects:
+  - {fileID: 2057036558}
+  - {fileID: 1926203485}
+  - {fileID: 276484221}
+  trackerSquareDebug: {fileID: 9130394165082746798, guid: dab75152c1256463aa0b4a9edec02c0b,
+    type: 3}
+  movementSpeed: 5
+  fovSpeed: 2
 --- !u!4 &598313870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4998484078767814073, guid: e65f505f31eeb644892ac7fc41c9185e,
@@ -3335,6 +3362,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043393569}
   m_CullTransparentMesh: 0
+--- !u!1 &2057036558 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5109236107827401782, guid: be55d8b50bd1b464bba516640a0076c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 766300417}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2077253668
 GameObject:
   m_ObjectHideFlags: 0

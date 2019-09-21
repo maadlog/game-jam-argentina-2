@@ -9,7 +9,6 @@ public class Level1Camera : MonoBehaviour
     void Start()
     {
         cameraAnimator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
-        
     }
 
     bool done = false;
