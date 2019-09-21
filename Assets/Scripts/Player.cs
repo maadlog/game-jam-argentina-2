@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
         }
         if (shootTimer < 0)
         {
-            if (Input.GetKey(KeyCode.Space) || Input.GetAxisRaw("Fire1") == 1)
+            if (Input.GetKey(KeyCode.Space) || Input.GetAxisRaw("Fire1") == 1) //TODO: Fix this warning (>= maybe?)
             {
                 timeShooting += Time.deltaTime;
                 if (timeShooting > timeShootingLimit)
@@ -100,10 +100,6 @@ public class Player : MonoBehaviour
 
                 float proportion = timeShooting / timeShootingLimit;
 
-                if (proportion > 0.4)
-                {
-                    cameraAnimator.Play("Shoot");
-                }
 
                 foreach (GameObject gun in GameObject.FindGameObjectsWithTag("Gun"))
                 {

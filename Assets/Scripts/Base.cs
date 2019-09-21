@@ -36,7 +36,7 @@ public class Base : MonoBehaviour, ITrackable
             gameManager.LostLevel();
             gameManager.PlaySoundExplosion();
 
-            tracker.RemoveItem(gameObject);
+            tracker?.RemoveItem(gameObject);
 
             // Destroy base
             Destroy(gameObject);

@@ -43,4 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ac9b7acaa4a4a16a8e2cacaf81a3b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8419022448936817389, guid: d07eba7f03dc440adbc2d8632fd8aeda, type: 3}
+  prefab: {fileID: 6902593553982217985, guid: 40331febda82f3f459fad539a6822476, type: 3}
+  spawnPoint: {fileID: 0}
+  portalSpawnDistance: 35
