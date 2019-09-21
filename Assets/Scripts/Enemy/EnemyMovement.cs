@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float maxSpeed = 2f;
+    
+    public float maxSpeed = 95f;
     public bool stopped = false;
 
     // Start is called before the first frame update

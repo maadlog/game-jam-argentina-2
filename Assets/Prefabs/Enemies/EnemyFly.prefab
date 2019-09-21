@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2599e38b15c9a41d3925d229d9b93245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 2
+  maxSpeed: 3.5
   stopped: 0
 --- !u!114 &7750002999909186601
 MonoBehaviour:
@@ -181,6 +181,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3446c35ecd34874a8643c4efeb88b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSpeed: 90
   tagToFace: Base
   instantaneous: 0

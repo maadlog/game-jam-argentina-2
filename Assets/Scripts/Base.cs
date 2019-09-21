@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Base : MonoBehaviour
+
+public class Base : MonoBehaviour, ITrackable
 {
 	// Start is called ;before the first frame update
 	public float health;
@@ -34,11 +35,20 @@ public class Base : MonoBehaviour
             // Lost Level on game manager
             gameManager.LostLevel();
             gameManager.PlaySoundExplosion();
+
+            tracker?.RemoveItem(gameObject);
+
             // Destroy base
             Destroy(gameObject);
 		}
 
 	}
 
-  
+    private CameraTracker tracker;
+    public void SetTracker(CameraTracker tracker)
+    {
+        this.tracker = tracker;
+    }
+
+
 }

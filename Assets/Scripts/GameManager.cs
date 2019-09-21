@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 	public float timeToMoveToMenu = 2f;
-	public Text scoreText;
+	
 	public Text lostText;
 	public Text CounterText;
 
@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
 	public void UpdateScore(int score)
 	{
 		this.score += score;
-		scoreText.text = "Score: " + this.score.ToString();
 	}
 
 	public void ChangeLevel()

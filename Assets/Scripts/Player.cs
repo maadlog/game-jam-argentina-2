@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public float rotateSpeed = 1f;
     public float shootColdDown = 2f;
 
+    public float allowedDistanceFromBase = 35f;
+
     public GameObject bullet;
 
     float shootTimer;
@@ -52,7 +54,7 @@ public class Player : MonoBehaviour
             // handle foward or backwards
             float moveVertical = vertical;
             transform.position += moveVertical * transform.right * movementSpeed * Time.deltaTime;
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x,-26.5f, 26.5f), Mathf.Clamp(transform.position.y,-11,11));
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x,-allowedDistanceFromBase, allowedDistanceFromBase), Mathf.Clamp(transform.position.y,-allowedDistanceFromBase, allowedDistanceFromBase));
         }
         else
         {
@@ -84,7 +86,7 @@ public class Player : MonoBehaviour
         }
         if (shootTimer < 0)
         {
-            if (Input.GetKey(KeyCode.Space) || Input.GetAxisRaw("Fire1") == 1)
+            if (Input.GetKey(KeyCode.Space) || Input.GetAxisRaw("Fire1") == 1) //TODO: Fix this warning (>= maybe?)
             {
                 timeShooting += Time.deltaTime;
                 if (timeShooting > timeShootingLimit)
@@ -98,10 +100,6 @@ public class Player : MonoBehaviour
 
                 float proportion = timeShooting / timeShootingLimit;
 
-                if (proportion > 0.4)
-                {
-                    cameraAnimator.Play("Shoot");
-                }
 
                 foreach (GameObject gun in GameObject.FindGameObjectsWithTag("Gun"))
                 {
