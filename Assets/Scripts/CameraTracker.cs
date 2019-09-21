@@ -43,21 +43,26 @@ class Square
     }
 }
 
+public interface ITrackable
+{
+    void SetTracker(CameraTracker tracker);
+}
+
 public class CameraTracker : MonoBehaviour
 {
     
     public List<GameObject> trackingObjects;
 
-    public GameObject trackerSquareDebug;
-    private GameObject debugPrefab;
-
     public float movementSpeed = 5f;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
-        debugPrefab = Instantiate(trackerSquareDebug, transform.position, Quaternion.identity);
+        trackingObjects.ForEach(x => x.GetComponent<ITrackable>()?.SetTracker(this));
+    }
+
+    public void RemoveItem(GameObject obj)
+    {
+        this.trackingObjects.Remove(obj);
     }
 
     private void Awake()
@@ -80,7 +85,6 @@ public class CameraTracker : MonoBehaviour
         // viewingHeight = viewingMaxLength * 9f / 16f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         InitializeStandars();
@@ -116,13 +120,7 @@ public class CameraTracker : MonoBehaviour
                 
             });
 
-            debugPrefab.transform.position = new Vector3(tracking.Center().x, tracking.Center().y, trackingObjects.First().transform.position.z);
-            debugPrefab.transform.localScale = new Vector3(tracking.Width(), tracking.Height());
-
-            
-
             targetPosition = tracking.Center();
-            //Regla de 3, si baseFov -> baseFOVMaxLength, xFOV -> BiggestTrackingSide
             if (tracking.Height() > tracking.Width())
             {
                 targetPosition.z = GetZToViewY(tracking.Height());

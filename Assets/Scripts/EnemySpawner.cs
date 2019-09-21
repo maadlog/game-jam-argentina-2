@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
     float enemyRateDecrease = 0.8f; // How much the rate decreases with each generation
     float minimunEnemyRate = 0.6f; //Minimun rate for enemy spawnage
 
+    public float portalSpawnDistance = 35f;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,7 +63,7 @@ public class EnemySpawner : MonoBehaviour
             //Generate random point in sphere centered on this Spawner
             Vector3 newPosition = Random.onUnitSphere;
             newPosition.z = 0;
-            newPosition = newPosition.normalized * spawnPoint.transform.position.magnitude; // Normalize direction and get distance
+            newPosition = newPosition.normalized * portalSpawnDistance; // Normalize direction and get distance
 
             spawnPoint.transform.position = newPosition;
             spawnPoint.GetComponent<Animator>().Play("Appear");

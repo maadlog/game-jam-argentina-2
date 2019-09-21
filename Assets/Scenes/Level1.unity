@@ -1155,7 +1155,6 @@ GameObject:
   - component: {fileID: 558639856}
   - component: {fileID: 558639855}
   - component: {fileID: 558639858}
-  - component: {fileID: 558639859}
   - component: {fileID: 558639860}
   m_Layer: 0
   m_Name: Main Camera
@@ -1197,7 +1196,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 130
+  field of view: 100
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1248,18 +1247,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &558639859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558639854}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 874f53a9bad524c64b3e2ad35880acc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &558639860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,10 +1263,7 @@ MonoBehaviour:
   - {fileID: 2057036558}
   - {fileID: 1926203485}
   - {fileID: 276484221}
-  trackerSquareDebug: {fileID: 9130394165082746798, guid: dab75152c1256463aa0b4a9edec02c0b,
-    type: 3}
   movementSpeed: 5
-  fovSpeed: 2
 --- !u!4 &598313870 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4998484078767814073, guid: e65f505f31eeb644892ac7fc41c9185e,
@@ -3104,7 +3088,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926203485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40, y: 0, z: 0}
+  m_LocalPosition: {x: -30, y: 0, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

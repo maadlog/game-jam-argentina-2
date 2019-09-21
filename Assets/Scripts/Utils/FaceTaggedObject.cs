@@ -42,14 +42,11 @@ public class DampRotationer: IRotationer
 
         if (remainingRot > 45)
         {
-            parentSprite.color = Color.blue;
             speed = mediumRotationSpeed;
         } else if (remainingRot > 15){
-            parentSprite.color = Color.magenta;
             speed = slowRotationSpeed;
         } else
         {
-            parentSprite.color = Color.yellow;
             speed = mediumRotationSpeed;
         }
 
