@@ -330,7 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 78790854}
   m_Layer: 0
-  m_Name: A (6)
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -462,7 +462,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToMoveToMenu: 2
-  scoreText: {fileID: 1966659187}
   lostText: {fileID: 1316581239}
   CounterText: {fileID: 1702911277}
   explotionSound: {fileID: 174046681}
@@ -1951,7 +1950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1068244367}
   m_Layer: 0
-  m_Name: A (2)
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2877,7 +2876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1377402829}
   m_Layer: 0
-  m_Name: A (1)
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3085,7 +3084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1561050329}
   m_Layer: 0
-  m_Name: A
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3626,6 +3625,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1966280019}
   - component: {fileID: 1966280018}
+  - component: {fileID: 1966280020}
+  - component: {fileID: 1966280021}
+  - component: {fileID: 1966280022}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -3647,7 +3649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   startWaitTime: 2
-  fixedMovement: 0
+  shootWaitTime: 1.5
   movePoints:
   - {fileID: 1561050329}
   - {fileID: 1377402829}
@@ -3672,6 +3674,61 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1966280020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966280017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c4975b8cc464246b6cc3bd760c4c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 300
+  timeBetweenHits: 0.1
+  damageableTags:
+  - Bullet
+  damageParticles: {fileID: 731243799850897047, guid: 0e0c2540ca714a7429ace686eaac27e3,
+    type: 3}
+--- !u!58 &1966280021
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966280017}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.5
+--- !u!50 &1966280022
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966280017}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1966659184
 GameObject:
   m_ObjectHideFlags: 0
@@ -3861,7 +3918,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2038414715}
   m_Layer: 0
-  m_Name: A (5)
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3964,7 +4021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2077253669}
   m_Layer: 0
-  m_Name: A (3)
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4094,7 +4151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2117103223}
   m_Layer: 0
-  m_Name: A (7)
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4124,7 +4181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2121657313}
   m_Layer: 0
-  m_Name: A (4)
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class EnemyShoot : MonoBehaviour
 {
-
 	private void OnTriggerEnter2D(Collider2D collision)
-	{        
+	{
 		// collision with base
 		if (collision.CompareTag("Base"))
 		{
