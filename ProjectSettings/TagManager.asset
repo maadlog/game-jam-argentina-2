@@ -9,6 +9,7 @@ TagManager:
   - Gun
   - EnemyBullet
   - EnemySpawnPoint
+  - GunIndicator
   layers:
   - Default
   - TransparentFX

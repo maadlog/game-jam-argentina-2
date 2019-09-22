@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour
     System.Random random = new System.Random();
     public AudioSource[] ShootSounds;
 
+    private Indicator gunIndicator { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,10 @@ public class Player : MonoBehaviour
         cameraAnimator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
         animator = GetComponent<Animator>();
         shootTimer = shootColdDown;
+        gunIndicator = GameObject
+            .FindGameObjectsWithTag("GunIndicator")
+            .FirstOrDefault(x => x.name.Contains("MainGun"))
+            ?.GetComponent<Indicator>();
     }
 
     // Update is called once per frame
@@ -64,47 +71,67 @@ public class Player : MonoBehaviour
 
     }
 
-    float timeShooting = 0f;
-    float timeShootingLimit = 1f;
-    float staggeredCooldown = 2f;
     bool isStaggered = false;
-    float staggeredTimer = 0f;
+    float weaponHeatLimit = 1.5f;
+    float weaponHeat = 0f;
+    float weaponCoolOffRate = 0.2f;
+
+    private bool Shooting()
+    {
+        return Input.GetKey(KeyCode.Space) || Input.GetAxisRaw("Fire1") == 1;
+    }
+    private bool Fixing()
+    {
+        return Input.GetKey(KeyCode.Q)
+            || Input.GetKey(KeyCode.E)
+            || Input.GetButtonDown("FixA")   //Map to koystick L & R
+            || Input.GetButtonDown("FixB");
+    }
 
     void Shoot()
     {
         if (isStaggered)
         {
-            staggeredTimer += Time.deltaTime;
-            if (staggeredTimer >= staggeredCooldown)
+            if (Fixing())
             {
-                staggeredTimer = 0;
+                weaponHeat -= Time.deltaTime * 2;
+            } 
+            else
+            {
+                weaponHeat -= Time.deltaTime * weaponCoolOffRate;
+            }
+            if (weaponHeat <= 0)
+            {
+                weaponHeat = 0;
                 isStaggered = false;
                 animator.SetBool("isStaggered", false);
-
             }
+
+            gunIndicator?.SetRate(weaponHeat / weaponHeatLimit);
+            
             return;
         }
-        if (shootTimer < 0)
+        if (shootTimer < 0 && Shooting())
         {
-            if (Input.GetKey(KeyCode.Space) || Input.GetAxisRaw("Fire1") == 1) //TODO: Fix this warning (>= maybe?)
-            {
-                timeShooting += Time.deltaTime;
-                if (timeShooting > timeShootingLimit)
+                weaponHeat += Time.deltaTime;
+
+                var heatProportion = weaponHeat / weaponHeatLimit;
+                gunIndicator?.SetRate(heatProportion);
+                if (weaponHeat >= weaponHeatLimit)
                 {
-                    timeShooting = timeShootingLimit;
                     isStaggered = true;
                     animator.SetBool("isStaggered", true);
+                    return;
                 }
+
 
                 var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
 
-                float proportion = timeShooting / timeShootingLimit;
-
-
+                
                 foreach (GameObject gun in GameObject.FindGameObjectsWithTag("Gun"))
                 {
                     var intDisplace = UnityEngine.Random.Range(0f, .1f) * sign;
-                    var disp = intDisplace * proportion;
+                    var disp = intDisplace * heatProportion;
 
                     var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
                     var trasn = gun.transform.position + displace;
@@ -113,16 +140,22 @@ public class Player : MonoBehaviour
                 }
 
                 shootTimer = shootColdDown;
-            }
-            else
-            {
-                timeShooting = 0;
-            }
-
+            
         }
         else
         {
+
             shootTimer -= Time.deltaTime;
+            if (!Shooting())
+            {
+                weaponHeat -= Time.deltaTime * weaponCoolOffRate;
+                if (weaponHeat <= 0)
+                {
+                    weaponHeat = 0;
+                }
+                gunIndicator?.SetRate(weaponHeat / weaponHeatLimit);
+            }
+                
         }
     }
 
