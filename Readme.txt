@@ -19,4 +19,21 @@ Future version:
 	
 }
 
+23/09/2019
+{
+Current Version:
+	-Text Typing animation.
+	-Continue Button.
+	-Typing fx.
+	-GeneralTank Animation.
+
+
+Future Version:
+	-Transitions from gameMenu.
+	-More sprites and better animations.
+	-GeneralTank, stop talking! 
+
+}
+
+
 
