@@ -49,7 +49,7 @@ public class Dialog : MonoBehaviour
 
             #endregion
 
-            
+
             #region Reproduccion de sonidos
          int AudioIndex = Random.Range(0, Typing.Count-1); //Indico un indice aleatorio para que se reproduzcan sonuidos
 
@@ -61,22 +61,26 @@ public class Dialog : MonoBehaviour
         }
  
     }
-    public void NextSentence()
+
+    /*Esto hace que cuando este activo el boton y sea presionado, se aumente el indice del array
+    de oraciones y pase al siguiente texto
+     */
+    public void NextSentence() 
     {  
-        if(index < sentences.Length -1)
+        if(index < sentences.Length -1) //Si el indice es menor que la cantidad de oraciones -1
         {
-            GeneralTank.gameObject.GetComponent<Animator>().PlayInFixedTime("general", 0);
+            GeneralTank.gameObject.GetComponent<Animator>().PlayInFixedTime("general", 0); //Esto es una prueba, no funciona
             
-            index++;
-             textDisplay.text = "";
-             StartCoroutine(Type());
+            index++; //Sumo uno al indice
+             textDisplay.text = ""; //Imprimo un caracter vacio
+             StartCoroutine(Type()); //Y comieno la rutina de escribir
 
         }
 
         else
         {
-            textDisplay.text = "";
-            continueButton.SetActive(false);
+            textDisplay.text = ""; //Sino, imprimo un texto vacio
+            continueButton.SetActive(false); //Y no activo el boton todavia.
 
         }
        
