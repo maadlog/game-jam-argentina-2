@@ -6,14 +6,10 @@ using UnityEngine.UI;
 
 public class Indicator : MonoBehaviour
 {
-    public enum State
-    {
-        Good, Warning, Bad
-    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        originalColor = this.GetComponent<Image>().color;
     }
 
     // Update is called once per frame
@@ -22,70 +18,35 @@ public class Indicator : MonoBehaviour
         
     }
 
-    private State currentState;
-    public void Trigger(State state)
-    {
-        if (state == currentState)
-        {
-            return;
-        }
+    Color cappedColor = new Color(0.88f, 0.01f, 0.01f);
+    Color originalColor;
+    //Helix shape means that starts at about 60º as the "0"
+    // (Pixel perfect, it starts at the 0.18 fill amount)
+    // If 360 -> 1, then x -> 0.18 -> x = 64.8
 
-        currentState = state;
+    // Full Shape -> 2PI
+    // Partial -> (2PI - 64.8*Math.Deg2Rad)
 
-        switch (state)
-        {
-            case State.Good:
-                this.GetComponent<Animator>().Play("Good");
-                    break;
-            case State.Warning:
-                this.GetComponent<Animator>().Play("Warning");
-                    break;
-            case State.Bad:
-                this.GetComponent<Animator>().Play("Bad");
-                break;
-        }
-    }
+    // With prop = 0 => 64.8f * Mathf.Deg2Rad / 2PI = 0 * fixingConst + 64.8f * Mathf.Deg2Rad / 2PI
+    // with prop = 1 => 1 = 1 * MyConst + 64.8f * Mathf.Deg2Rad / 2PI
+    //  =>> fixingConstant = 1 - (64.8f * Mathf.Deg2Rad/2pi)
+    // proportionFixed = proportion * (1 - fixingConstant) + fixingConstant;
+    float fixingConstant = 64.8f * Mathf.Deg2Rad / (Mathf.PI * 2);
 
-    //  Bad  Warning  Good
-    //R 225    225    25
-    //G  25    225    225
-    //B  25     25    25
-
-    //225 * 2 = 450
-
-    const float topRef = 0.88f;
-    const float bottomRef = 0.01f;
-
-    bool capped = false;
-    Color cappedColor = new Color(topRef, bottomRef, bottomRef);
     internal void SetRate(float proportion)
     {
         if (proportion >= 1)
         {
-            capped = true;
+            this.GetComponent<Image>().color = cappedColor;
         }
         if (proportion <= 0)
         {
-            capped = false;
+            this.GetComponent<Image>().color = originalColor;
         }
 
-        this.GetComponent<Image>().fillAmount = proportion;
-        if (capped)
-        {
-            this.GetComponent<Image>().color = cappedColor;
-        }
-        else
-        {
-            this.GetComponent<Image>().color = new Color(
-                Mathf.Lerp(bottomRef, topRef*2, proportion)
-             , Mathf.Lerp(topRef*2, bottomRef, proportion)
-             , bottomRef
-                );
-        }
-        
+        var proportionFixed = proportion * (1 - fixingConstant) + fixingConstant;
 
-
-
+        this.GetComponent<Image>().fillAmount = proportionFixed;
     }
 
 }
