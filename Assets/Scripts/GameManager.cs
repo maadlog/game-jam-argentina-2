@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 		lostText.enabled = false;
 
         lostPanel.SetActive(false);
+        
     }
 
 	// Update is called once per frame

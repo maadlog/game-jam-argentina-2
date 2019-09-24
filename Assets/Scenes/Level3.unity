@@ -420,7 +420,7 @@ PrefabInstance:
     - target: {fileID: 3075257304848665763, guid: 2f1967dbd80343b4492955a6e5018542,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00064086914
+      value: 0.00061035156
       objectReference: {fileID: 0}
     - target: {fileID: 3075257304848665763, guid: 2f1967dbd80343b4492955a6e5018542,
         type: 3}
@@ -598,7 +598,8 @@ MonoBehaviour:
   CounterText: {fileID: 1702911277}
   explotionSound: {fileID: 174046681}
   enemyDeathSound: {fileID: 174046682}
-  LevelCompleted: {fileID: 0}
+  LevelCompleted: {fileID: 1826976329}
+  ingame: 0
 --- !u!4 &174046680
 Transform:
   m_ObjectHideFlags: 0
@@ -1461,7 +1462,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.53333336, g: 0.14117648, b: 0.14509805, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3606,6 +3607,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3504104910871047389, guid: 07cd087a2f0f1a64e9a8d0e03ec9cd23,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 119.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504104910871047389, guid: 07cd087a2f0f1a64e9a8d0e03ec9cd23,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 134.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3504104911003274196, guid: 07cd087a2f0f1a64e9a8d0e03ec9cd23,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3650,6 +3661,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: YOU WIN!
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504104910871047388, guid: 07cd087a2f0f1a64e9a8d0e03ec9cd23,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 47
+      objectReference: {fileID: 0}
+    - target: {fileID: 3504104910871047388, guid: 07cd087a2f0f1a64e9a8d0e03ec9cd23,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 3504104910911769476, guid: 07cd087a2f0f1a64e9a8d0e03ec9cd23,
         type: 3}
@@ -4021,6 +4042,12 @@ PrefabInstance:
       objectReference: {fileID: 222570632}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad17e6da16701d144b5068b29deaf178, type: 3}
+--- !u!1 &1826976329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3504104910933165945, guid: 07cd087a2f0f1a64e9a8d0e03ec9cd23,
+    type: 3}
+  m_PrefabInstance: {fileID: 1564429392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1840957768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4998484078767814073, guid: e65f505f31eeb644892ac7fc41c9185e,
