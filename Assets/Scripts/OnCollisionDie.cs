@@ -41,7 +41,8 @@ public class OnCollisionDie : MonoBehaviour
 		{
 			gameManager.UpdateScore(1);
 			EnemyDeath();
-			GameObject.Destroy(collision.gameObject);
+            gameManager.KillsPlayer();
+            GameObject.Destroy(collision.gameObject);
 		}
 	}
 

@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 	public float timeToMoveToMenu = 2f;
 	
 	public Text lostText;
+	public GameObject lostPanel;
+
 	public Text CounterText;
 
 	int score = 0;
@@ -20,8 +22,11 @@ public class GameManager : MonoBehaviour
 	GameObject fadeOff;
 	public AudioSource explotionSound;
 	public AudioSource enemyDeathSound;
-	// Start is called before the first frame update
-	void Awake()
+    int kills;
+    public GameObject LevelCompleted;
+
+    // Start is called before the first frame update
+    void Awake()
 	{
 		// set time to timer
 		menuTimer = timeToMoveToMenu;
@@ -39,12 +44,15 @@ public class GameManager : MonoBehaviour
 
 		UpdateScore(0);
 		lostText.enabled = false;
-	}
+        lostPanel.SetActive(false);
+
+    }
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (activateFadeOff)
+
+        if (activateFadeOff)
 		{
 
 		}
@@ -55,14 +63,14 @@ public class GameManager : MonoBehaviour
 		return gameManager;
 	}
 
-	public void UpdateScore(int score)
-	{
-		this.score += score;
-	}
+    public void UpdateScore(int score)
+    {
+        this.score += score;
+    }
 
-	public void ChangeLevel()
+    public void ChangeLevel()
 	{
-		SceneManager.LoadScene(GameObject.FindObjectOfType<NextLevel>().nextLevel);
+        SceneManager.LoadScene(GameObject.FindObjectOfType<NextLevel>().nextLevel);
 	}
 
 	public void LostLevel()
@@ -70,11 +78,11 @@ public class GameManager : MonoBehaviour
 
 		// show message
 		lostText.enabled = true;
+        lostPanel.SetActive(true);
+        // player cant move
 
-		// player cant move
-
-		// go to menu after a while
-		if (menuTimer < 0)
+        // go to menu after a while
+        if (menuTimer < 0)
 		{
 			SceneManager.LoadScene("Menu");
 		}
@@ -87,12 +95,22 @@ public class GameManager : MonoBehaviour
 	public void UpdateCounter(int counter)
 	{
 		this.refugees += counter;
+       
 		CounterText.text = refugees.ToString() + "/" + max_refugees.ToString();
 		if (this.refugees >= GameObject.FindObjectOfType<NextLevel>().counterLimit)
 		{
-			ChangeLevel();
-		}
+            //ChangeLevel();
+            LevelCompleted.GetComponent<LevelCompleted>().WinLevel();
+            CalcularScore();
+           
+
+        }
 	}
+
+    public void Win()
+    {
+        LevelCompleted.GetComponent<LevelCompleted>().WinLevel();
+    }
 
 	public void PlaySoundExplosion()
 	{
@@ -103,4 +121,20 @@ public class GameManager : MonoBehaviour
 	{
 		enemyDeathSound.Play();
 	}
+
+    public void KillsPlayer()
+    {
+        kills++;
+    }
+
+    public void CalcularScore()
+    {
+        this.score =(refugees * 18) + (kills * 26);
+        LevelCompleted.GetComponent<LevelCompleted>().ShowKills(kills);
+        LevelCompleted.GetComponent<LevelCompleted>().ShowRefugees(refugees);
+        LevelCompleted.GetComponent<LevelCompleted>().ShowScore(score);
+    }
+
+  
+  
 }

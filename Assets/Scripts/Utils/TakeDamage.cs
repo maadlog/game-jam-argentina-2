@@ -10,13 +10,16 @@ public class TakeDamage : MonoBehaviour
 	public string[] damageableTags = new string[0];
 	public ParticleSystem damageParticles;
 
-	float health;
+	public float health;
 	float hitsTimer = 0f;
+
+    GameManager gm;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		health = startHealth;
+        gm = GameManager.getGameManager();
 	}
 
 	// Update is called once per frame
@@ -51,6 +54,7 @@ public class TakeDamage : MonoBehaviour
 		else
 		{
 			Kill();
+
 		}
 
 		Instantiate(damageParticles, transform.position, Quaternion.identity);
@@ -59,5 +63,7 @@ public class TakeDamage : MonoBehaviour
 	void Kill()
 	{
 		Destroy(gameObject);
-	}
+        gm.Win();
+
+    }
 }
