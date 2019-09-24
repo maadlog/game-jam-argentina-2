@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 	public float timeToMoveToMenu = 2f;
 	
 	public Text lostText;
-	public GameObject lostPanel;
+
 
 	public Text CounterText;
 
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
 		UpdateScore(0);
 		lostText.enabled = false;
-        lostPanel.SetActive(false);
+
 
     }
 
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
 
 		// show message
 		lostText.enabled = true;
-        lostPanel.SetActive(true);
+      
         // player cant move
 
         // go to menu after a while
