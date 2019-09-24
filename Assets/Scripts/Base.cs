@@ -27,11 +27,11 @@ public class Base : MonoBehaviour, ITrackable
 	{
 		health -= damage;
         
-		if (health < 0)
+		if (health <= 0)
 		{
             // Create explosion on base positon
             Instantiate(explosion, transform.position, Quaternion.identity);
-
+            uiHealth.fillAmount = 0;
             // Lost Level on game manager
             gameManager.LostLevel();
             gameManager.PlaySoundExplosion();
