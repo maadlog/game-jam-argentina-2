@@ -75,9 +75,9 @@ public class Player : MonoBehaviour
     }
 
     bool isStaggered = false;
-    float weaponHeatLimit = 1.5f;
+    float weaponHeatLimit = 4f;
     float weaponHeat = 0f;
-    float weaponCoolOffRate = 0.2f;
+    float weaponCoolOffRate = 0.5f;
 
     private bool Shooting()
     {
@@ -91,14 +91,18 @@ public class Player : MonoBehaviour
             || Input.GetButtonDown("FixB");
     }
 
-    void Shoot()
+    private void FixedUpdate()
     {
         if (isStaggered)
         {
+            if (Shooting())
+            {
+                return;
+            }
             if (Fixing())
             {
-                weaponHeat -= Time.deltaTime * 2;
-            } 
+                weaponHeat -= Time.deltaTime * (2 + weaponCoolOffRate);
+            }
             else
             {
                 weaponHeat -= Time.deltaTime * weaponCoolOffRate;
@@ -111,44 +115,25 @@ public class Player : MonoBehaviour
             }
 
             gunIndicator?.SetRate(weaponHeat / weaponHeatLimit);
-            
+
             return;
         }
-        if (shootTimer < 0 && Shooting())
+        if (Shooting())
         {
-                weaponHeat += Time.deltaTime;
+            weaponHeat += Time.deltaTime;
 
-                var heatProportion = weaponHeat / weaponHeatLimit;
-                gunIndicator?.SetRate(heatProportion);
-                if (weaponHeat >= weaponHeatLimit)
-                {
-                    isStaggered = true;
-                    animator.SetBool("isStaggered", true);
-                    return;
-                }
+            var heatProportion = weaponHeat / weaponHeatLimit;
+            gunIndicator?.SetRate(heatProportion);
+            if (weaponHeat >= weaponHeatLimit)
+            {
+                isStaggered = true;
+                animator.SetBool("isStaggered", true);
+                return;
+            }
 
-
-                var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
-
-                
-                foreach (GameObject gun in GameObject.FindGameObjectsWithTag("Gun"))
-                {
-                    var intDisplace = UnityEngine.Random.Range(0f, .1f) * sign;
-                    var disp = intDisplace * heatProportion;
-
-                    var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
-                    var trasn = gun.transform.position + displace;
-                    Instantiate(bullet, trasn, transform.rotation);
-                    PlayShootSound();
-                }
-
-                shootTimer = shootColdDown;
-            
         }
         else
         {
-
-            shootTimer -= Time.deltaTime;
             if (!Shooting())
             {
                 weaponHeat -= Time.deltaTime * weaponCoolOffRate;
@@ -158,7 +143,38 @@ public class Player : MonoBehaviour
                 }
                 gunIndicator?.SetRate(weaponHeat / weaponHeatLimit);
             }
-                
+
+        }
+    }
+
+    void Shoot()
+    {
+        if (isStaggered)
+        {
+            return;
+        }
+        if (shootTimer < 0 && Shooting())
+        {  
+            var heatProportion = weaponHeat / weaponHeatLimit;
+              
+            var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
+
+            foreach (GameObject gun in GameObject.FindGameObjectsWithTag("Gun"))
+            {
+                var intDisplace = UnityEngine.Random.Range(0f, .1f) * sign;
+                var disp = intDisplace * heatProportion;
+
+                var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
+                var trasn = gun.transform.position + displace;
+                Instantiate(bullet, trasn, transform.rotation);
+                PlayShootSound();
+            }
+
+            shootTimer = shootColdDown;   
+        }
+        else
+        {
+            shootTimer -= Time.deltaTime;
         }
     }
 
