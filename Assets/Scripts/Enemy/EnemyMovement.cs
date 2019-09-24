@@ -19,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (stopped)
             return;
+        
 
         Vector3 pos = transform.position;
 
@@ -27,6 +28,8 @@ public class EnemyMovement : MonoBehaviour
         pos += transform.rotation * velocity;
 
         transform.position = pos;
+
+
     }
 
     public void VarySpeedRandom()

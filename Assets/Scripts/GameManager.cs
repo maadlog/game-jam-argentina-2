@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 	public float timeToMoveToMenu = 2f;
 	
 	public Text lostText;
+	public GameObject lostPanel;
 
 
 	public Text CounterText;
@@ -24,12 +25,15 @@ public class GameManager : MonoBehaviour
 	public AudioSource enemyDeathSound;
     int kills;
     public GameObject LevelCompleted;
+    public bool ingame;
 
     // Start is called before the first frame update
     void Awake()
 	{
-		// set time to timer
-		menuTimer = timeToMoveToMenu;
+        Retomar();
+        ingame = true;
+        // set time to timer
+        menuTimer = timeToMoveToMenu;
 
 		// make it singleton
 		if (gameManager == null)
@@ -45,14 +49,15 @@ public class GameManager : MonoBehaviour
 		UpdateScore(0);
 		lostText.enabled = false;
 
-
+        lostPanel.SetActive(false);
     }
 
 	// Update is called once per frame
 	void Update()
 	{
-
-        if (activateFadeOff)
+        if (ingame == false)
+        { Transiciones(); }
+            if (activateFadeOff)
 		{
 
 		}
@@ -75,10 +80,10 @@ public class GameManager : MonoBehaviour
 
 	public void LostLevel()
 	{
-
-		// show message
-		lostText.enabled = true;
-      
+        ingame = false;
+        // show message
+        lostText.enabled = true;
+        lostPanel.SetActive(true);
         // player cant move
 
         // go to menu after a while
@@ -100,6 +105,7 @@ public class GameManager : MonoBehaviour
 		if (this.refugees >= GameObject.FindObjectOfType<NextLevel>().counterLimit)
 		{
             //ChangeLevel();
+            ingame = false;
             LevelCompleted.GetComponent<LevelCompleted>().WinLevel();
             CalcularScore();
            
@@ -109,7 +115,9 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
+        ingame = false;
         LevelCompleted.GetComponent<LevelCompleted>().WinLevel();
+        
     }
 
 	public void PlaySoundExplosion()
@@ -135,6 +143,14 @@ public class GameManager : MonoBehaviour
         LevelCompleted.GetComponent<LevelCompleted>().ShowScore(score);
     }
 
+    void Transiciones()
+    {
+            Time.timeScale = 0f;
+    }
+    void Retomar()
+    {
+        Time.timeScale = 1f;
+    }
   
   
 }

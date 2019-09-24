@@ -19,8 +19,9 @@ public class PauseMenu : MonoBehaviour
 	float timerAxis = 0;
 	float axisColdDownTime = 0.1f;
 
-	// Update is called once per frame
-	void Update()
+    // Update is called once per frame
+   
+    void Update()
 	{
 		if (Input.GetButtonDown("Cancel"))
 		{
@@ -40,6 +41,7 @@ public class PauseMenu : MonoBehaviour
 			CheckChangeSelectedOption();
 			CheckEnterOption();
 		}
+
 	}
 
 	void SelectedAnimation()

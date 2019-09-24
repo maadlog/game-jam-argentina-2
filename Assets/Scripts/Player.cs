@@ -47,27 +47,30 @@ public class Player : MonoBehaviour
     void Movement()
     {
         // get input
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+       
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
 
-        if (horizontal != 0 || vertical != 0)
-        {
-            // set move boolean to state moving
-            animator.SetBool("isMoving", true);
+            if (horizontal != 0 || vertical != 0)
+            {
+                // set move boolean to state moving
+                animator.SetBool("isMoving", true);
 
-            // handle rotation
-            transform.Rotate(0.0f, 0.0f, -horizontal * rotateSpeed);
+                // handle rotation
+                transform.Rotate(0.0f, 0.0f, -horizontal * rotateSpeed);
 
-            // handle foward or backwards
-            float moveVertical = vertical;
-            transform.position += moveVertical * transform.right * movementSpeed * Time.deltaTime;
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x,-allowedDistanceFromBase, allowedDistanceFromBase), Mathf.Clamp(transform.position.y,-allowedDistanceFromBase, allowedDistanceFromBase));
-        }
-        else
-        {
-            // set move boolean to state idle
-            animator.SetBool("isMoving", false);
-        }
+                // handle foward or backwards
+                float moveVertical = vertical;
+                transform.position += moveVertical * transform.right * movementSpeed * Time.deltaTime;
+                transform.position = new Vector3(Mathf.Clamp(transform.position.x, -allowedDistanceFromBase, allowedDistanceFromBase), Mathf.Clamp(transform.position.y, -allowedDistanceFromBase, allowedDistanceFromBase));
+            }
+            else
+            {
+                // set move boolean to state idle
+                animator.SetBool("isMoving", false);
+            }
+        
+        
 
     }
 

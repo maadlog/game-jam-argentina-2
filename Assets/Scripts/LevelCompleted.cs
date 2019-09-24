@@ -11,10 +11,10 @@ public class LevelCompleted : MonoBehaviour
     public Text cantidaddekills;
     public Text totalScore;
 
-
     void Start()
     {
         transicionPanel.SetActive(false);
+    
     }
 
     void Update()
@@ -30,7 +30,7 @@ public class LevelCompleted : MonoBehaviour
 public void WinLevel()
     {
         transicionPanel.SetActive(true);
-        //llama a pausa
+     
 
     }
   public  void ShowKills(int kills)
