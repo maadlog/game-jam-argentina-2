@@ -65,8 +65,15 @@ public class Boss : MonoBehaviour
 				{
 					if (shootTimer <= 0f)
 					{
-						Instantiate(bullet, gun.transform.position, transform.rotation);
-						shootTimer = shootWaitTime;
+                        var move = 10;
+                        var original = transform.rotation.eulerAngles;
+                        original.z -= move;
+						Instantiate(bullet, gun.transform.position, Quaternion.Euler(original));
+                        original.z += move;
+                        Instantiate(bullet, gun.transform.position, Quaternion.Euler(original));
+                        original.z += move;
+                        Instantiate(bullet, gun.transform.position, Quaternion.Euler(original));
+                        shootTimer = shootWaitTime;
 					}
 					else
 					{
