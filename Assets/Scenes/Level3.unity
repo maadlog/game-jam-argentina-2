@@ -1386,6 +1386,21 @@ PrefabInstance:
       propertyPath: m_Text
       value: Credits
       objectReference: {fileID: 0}
+    - target: {fileID: 1218854276908131562, guid: d9477274f983ac84d8712b8938dacdcd,
+        type: 3}
+      propertyPath: m_Text
+      value: You win!
+      objectReference: {fileID: 0}
+    - target: {fileID: 10191383752949065, guid: d9477274f983ac84d8712b8938dacdcd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Credits
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153414167767181983, guid: d9477274f983ac84d8712b8938dacdcd,
+        type: 3}
+      propertyPath: m_Text
+      value: Credits
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9477274f983ac84d8712b8938dacdcd, type: 3}
 --- !u!114 &314813263 stripped

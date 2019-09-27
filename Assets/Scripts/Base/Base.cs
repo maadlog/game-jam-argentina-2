@@ -12,6 +12,7 @@ public class Base : MonoBehaviour, ITrackable
     public GameObject explosion;
    
 	GameManager gameManager;
+   
 	void Start()
 	{
 		gameManager = GameManager.getGameManager();
@@ -22,17 +23,19 @@ public class Base : MonoBehaviour, ITrackable
 	void Update()
 	{
 		uiHealth.fillAmount = health / 100;
-	}
+    }
 	public void GetHit(int damage)
 	{
 		health -= damage;
         
 		if (health <= 0)
 		{
+            
             // Create explosion on base positon
             Instantiate(explosion, transform.position, Quaternion.identity);
             uiHealth.fillAmount = 0;
             // Lost Level on game manager
+
             gameManager.LostLevel();
             gameManager.PlaySoundExplosion();
 
@@ -40,7 +43,7 @@ public class Base : MonoBehaviour, ITrackable
 
             // Destroy base
             Destroy(gameObject);
-		}
+        }
 
 	}
 
