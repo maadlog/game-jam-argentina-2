@@ -136,20 +136,21 @@ public class CameraTracker : MonoBehaviour
         Camera.main.transform.position = mov;
     }
 
+    float padding = 15f;
     private float GetZToViewX(float x)
     {
-        var vl = x;
+        var vl = x + padding;
 
-        var absZ = vl / (Mathf.Tan(originalFOV * Mathf.Deg2Rad * 0.5f) * 2);
+        var absZ = vl / (Mathf.Tan(originalFOV * Mathf.Deg2Rad * 0.5f) * 4);
 
         return -absZ;
     }
 
     private float GetZToViewY(float y)
     {
-        var vl = y * 16 / 9;
+        var vl = (y + padding) * 16 / 9;
 
-        var absZ = vl / (Mathf.Tan(originalFOV * Mathf.Deg2Rad * 0.5f) * 2);
+        var absZ = vl / (Mathf.Tan(originalFOV * Mathf.Deg2Rad * 0.5f) * 4);
 
         return -absZ;
     }
