@@ -9,15 +9,18 @@ public class PauseMenu : MonoBehaviour
 
 	bool isPaused = false;
 	OptionsMenu optionsMenu;
+	GameManager gameManager;
 
-	void Start() {
-		optionsMenu = GetComponent<OptionsMenu>();
-	}
-	
-    // Update is called once per frame
-    void Update()
+	void Start()
 	{
-		if (Input.GetButtonDown("Cancel"))
+		optionsMenu = GetComponent<OptionsMenu>();
+		gameManager = FindObjectOfType<GameManager>();
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
+		if (Input.GetButtonDown("Cancel") && gameManager.isInGame)
 		{
 			if (isPaused)
 			{
@@ -34,9 +37,10 @@ public class PauseMenu : MonoBehaviour
 	{
 		pauseMenu.SetActive(true);
 		Time.timeScale = 0f;
-        isPaused = true;
+		isPaused = true;
 
-		if(optionsMenu) {
+		if (optionsMenu)
+		{
 			optionsMenu.isActivated = true;
 		}
 	}
@@ -45,9 +49,10 @@ public class PauseMenu : MonoBehaviour
 	{
 		pauseMenu.SetActive(false);
 		Time.timeScale = 1f;
-        isPaused = false;
+		isPaused = false;
 
-		if(optionsMenu) {
+		if (optionsMenu)
+		{
 			optionsMenu.isActivated = false;
 		}
 	}
