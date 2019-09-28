@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +7,52 @@ public class Boss : MonoBehaviour
 {
 	public float moveSpeed = 1f;
 	public float startWaitTime = 2f;
-	public float shootWaitTime = 1.5f;
-	public Transform[] movePoints = default;
+
+    private bool emerging = true;
+    private bool moving = true;
+
+    internal void PortalActive()
+    {
+        //If emerging or not, play animation and stop shooting
+        if (emerging)
+        {
+            idleTimer = idleTimerBase;
+            this.animator.Play("Emerge");
+        } else
+        {
+            this.animator.Play("Retire");
+        }
+
+        moving = false;
+        this.GetComponent<TakeDamage>().invulnerable = true;
+    }
+
+    public float shootWaitTime = 1.5f;
+    public float idleTimer;
+    public float idleTimerBase = 0.1f;
+    internal void PortalClosed()
+    {
+        //If emerging, start shooting
+        if (emerging)
+        {
+            moving = true;
+            this.GetComponent<TakeDamage>().invulnerable = false;
+        } else
+        {
+            //this.Teleport();
+            this.transform.position = movePoints[Random.Range(0, movePoints.Length)].position;
+            this.animator.Play("Invisible");
+            _portal.Appear(this.transform);
+            idleTimer = idleTimerBase;
+            emerging = true;
+        }
+    }
+
+    public Transform[] movePoints = default;
 	public GameObject bullet;
 	public Transform gun;
+    public GameObject bossPortal;
+    private BossPortal _portal;
 
 	Transform target;
 	float waitTimer;
@@ -24,7 +67,13 @@ public class Boss : MonoBehaviour
 	{
 		animator = GetComponentInChildren<Animator>();
 		baseTarget = GameObject.FindObjectOfType<Base>();
-		target = movePoints[Random.Range(0, movePoints.Length)];
+
+        _portal = bossPortal.GetComponent<BossPortal>();
+        _portal.Handle(this);
+        _portal.Appear(this.transform);
+        idleTimer = idleTimerBase;
+
+        target = movePoints[Random.Range(0, movePoints.Length)];
 		waitTimer = startWaitTime;
 	}
 
@@ -34,8 +83,10 @@ public class Boss : MonoBehaviour
 		MoveToFixedPoints();
 	}
 
+    bool phase2 = false;
 	void MoveToFixedPoints()
 	{
+        
 		if (baseTarget != null)
 		{
 			// Rotate to target
@@ -43,9 +94,27 @@ public class Boss : MonoBehaviour
 			float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 			transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+            if (!moving)
+            {
+                return;
+            }
+            idleTimer -= Time.deltaTime;
+            if (idleTimer > 0)
+            {
+                return;
+            }
+            if (idleTimer < -10) { idleTimer = -10; }
 
+            if (this.GetComponent<TakeDamage>().health <= this.GetComponent<TakeDamage>().startHealth / 2 && !phase2)
+            {
+                phase2 = true;
+                emerging = false;
+                _portal.Appear(this.transform);
+                idleTimer = idleTimerBase;
+                return;
+            }
 
-			if (Vector2.Distance(transform.position, target.position) > 0.2f)
+            if (Vector2.Distance(transform.position, target.position) > 0.2f)
 			{
 				animator.SetBool("isMoving", true);
 			}
@@ -55,6 +124,7 @@ public class Boss : MonoBehaviour
 			if (Vector2.Distance(transform.position, target.position) < 0.2f)
 			{
 				animator.SetBool("isMoving", false);
+                
 				if (waitTimer <= 0f)
 				{
 					target = movePoints[Random.Range(0, movePoints.Length)];
@@ -85,4 +155,5 @@ public class Boss : MonoBehaviour
 			}
 		}
 	}
+
 }

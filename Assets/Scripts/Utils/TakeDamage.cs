@@ -13,6 +13,8 @@ public class TakeDamage : MonoBehaviour
 	public float health;
 	float hitsTimer = 0f;
 
+    public bool invulnerable;
+
     GameManager gm;
 
 	// Start is called before the first frame update
@@ -47,6 +49,10 @@ public class TakeDamage : MonoBehaviour
 
 	void TakeHit()
 	{
+        if (invulnerable)
+        {
+            return;
+        }
 		if (health > 0)
 		{
 			health -= 10;
