@@ -138,8 +138,23 @@ public class GameManager : MonoBehaviour
 		LevelCompleted.GetComponent<LevelCompleted>().WinLevel();
 
 	}
+    int bosses = 1;
+    public void RegisterBoss()
+    {
+        bosses++;
+    }
+    
+    public void BossDefeated()
+    {
+        bosses--;
+        if (bosses <= 0)
+        {
+            Win();
+        }
+    }
 
-	public void PlaySoundExplosion()
+
+    public void PlaySoundExplosion()
 	{
 		explotionSound.Play();
 	}

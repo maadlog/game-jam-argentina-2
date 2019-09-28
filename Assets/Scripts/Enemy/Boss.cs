@@ -1,9 +1,6 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, IDamageable
 {
 	public float moveSpeed = 1f;
 	public float startWaitTime = 2f;
@@ -12,6 +9,9 @@ public class Boss : MonoBehaviour
     private bool moving = true;
     private bool waitingPortal;
     private bool waitinClose;
+
+    public GameObject fullBossPrefab;
+    public int generateChildrens = 2;
 
     internal void PortalActive()
     {
@@ -83,6 +83,8 @@ public class Boss : MonoBehaviour
 		animator = GetComponentInChildren<Animator>();
 		baseTarget = GameObject.FindObjectOfType<Base>();
 
+        
+
         _portal = bossPortal.GetComponent<BossPortal>();
         _portal.Handle(this);
         waitingPortal = true;
@@ -100,7 +102,14 @@ public class Boss : MonoBehaviour
 		MoveToFixedPoints();
 	}
 
+    void SetHealth(int someHealt)
+    {
+        this.GetComponent<TakeDamage>().startHealth = someHealt;
+        this.GetComponent<TakeDamage>().health = someHealt;
+    }
+
     bool phase2 = false;
+    public int shoots = 3;
 	void MoveToFixedPoints()
 	{
         
@@ -146,14 +155,24 @@ public class Boss : MonoBehaviour
 				{
 					if (shootTimer <= 0f)
 					{
-                        var move = 10;
-                        var original = transform.rotation.eulerAngles;
-                        original.z -= move;
-						Instantiate(bullet, gun.transform.position, Quaternion.Euler(original));
-                        original.z += move;
-                        Instantiate(bullet, gun.transform.position, Quaternion.Euler(original));
-                        original.z += move;
-                        Instantiate(bullet, gun.transform.position, Quaternion.Euler(original));
+                        if (shoots == 1)
+                        {
+                            Instantiate(bullet, gun.transform.position, transform.rotation);
+                        } else
+                        {
+                            var move = 10f;
+                            var start = move / 2;
+                            var piece = move / shoots;
+                            var original = transform.rotation.eulerAngles;
+                            original.z -= start;
+                            for (int i = 0; i < shoots; i++)
+                            {
+                                Instantiate(bullet, gun.transform.position, Quaternion.Euler(original));
+                                original.z += piece;
+                            }
+                        }
+                        
+                        
                         shootTimer = shootWaitTime;
 					}
 					else
@@ -167,4 +186,29 @@ public class Boss : MonoBehaviour
 		}
 	}
 
+    public void Die()
+    {
+        Destroy(gameObject);
+        if (generateChildrens > 0)
+        {
+            GameManager.getGameManager().RegisterBoss();
+            GameManager.getGameManager().RegisterBoss();
+
+            var miniboss = Instantiate(fullBossPrefab, Vector3.zero, Quaternion.identity);
+            miniboss.GetComponentInChildren<Boss>().generateChildrens = generateChildrens - 1;
+            miniboss.GetComponentInChildren<Boss>().shoots = shoots - 1;
+            miniboss.GetComponentInChildren<Boss>().transform.localScale = this.transform.localScale * 0.8f;
+            miniboss.GetComponentInChildren<Boss>().fullBossPrefab = fullBossPrefab;
+            miniboss.GetComponentInChildren<Boss>().SetHealth(Mathf.RoundToInt( this.GetComponent<TakeDamage>().startHealth / 2));
+
+            miniboss = Instantiate(fullBossPrefab, Vector3.zero, Quaternion.identity);
+            miniboss.GetComponentInChildren<Boss>().generateChildrens = generateChildrens - 1;
+            miniboss.GetComponentInChildren<Boss>().shoots = shoots - 1;
+            miniboss.GetComponentInChildren<Boss>().fullBossPrefab = fullBossPrefab;
+            miniboss.GetComponentInChildren<Boss>().transform.localScale = this.transform.localScale * 0.8f;
+            miniboss.GetComponentInChildren<Boss>().SetHealth(Mathf.RoundToInt(this.GetComponent<TakeDamage>().startHealth / 2));
+        }
+        GameManager.getGameManager().BossDefeated();
+        
+    }
 }

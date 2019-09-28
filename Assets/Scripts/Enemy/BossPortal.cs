@@ -6,7 +6,6 @@ public class BossPortal : MonoBehaviour
 {
     public void SpawnBoss()
     {
-        Debug.Log("Portal Opened");
         boss?.PortalActive();
     }
 
@@ -25,7 +24,6 @@ public class BossPortal : MonoBehaviour
 
     public void Disappear()
     {
-        Debug.Log("Disappear portal");
         this.GetComponent<Animator>().Play("Disappear");
     }
     

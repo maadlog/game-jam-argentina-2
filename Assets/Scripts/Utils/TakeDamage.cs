@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class TakeDamage : MonoBehaviour
+public interface IDamageable
+{
+    void Die();
+}
+
+public class TakeDamage : MonoBehaviour 
 {
 	public float startHealth = 100f;
 	public float timeBetweenHits = 0.1f;
@@ -15,13 +20,13 @@ public class TakeDamage : MonoBehaviour
 
     public bool invulnerable;
 
-    GameManager gm;
+    GameObject owner;
+
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		health = startHealth;
-        gm = GameManager.getGameManager();
 	}
 
 	// Update is called once per frame
@@ -68,8 +73,8 @@ public class TakeDamage : MonoBehaviour
 
 	void Kill()
 	{
-		Destroy(gameObject);
-        gm.Win();
+        this.GetComponent<IDamageable>().Die();
+		
 
     }
 }

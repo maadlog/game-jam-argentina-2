@@ -23,7 +23,6 @@ public class BossAnimationCallback : MonoBehaviour
 
     void FinishedRetiring()
     {
-        Debug.Log("FinishedRetiring boss callback");
         this.GetComponentInParent<Boss>().FinishedRetiring();
     }
 }
