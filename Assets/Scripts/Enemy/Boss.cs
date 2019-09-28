@@ -10,13 +10,14 @@ public class Boss : MonoBehaviour
 
     private bool emerging = true;
     private bool moving = true;
+    private bool waitingPortal;
+    private bool waitinClose;
 
     internal void PortalActive()
     {
         //If emerging or not, play animation and stop shooting
         if (emerging)
         {
-            idleTimer = idleTimerBase;
             this.animator.Play("Emerge");
         } else
         {
@@ -28,24 +29,38 @@ public class Boss : MonoBehaviour
     }
 
     public float shootWaitTime = 1.5f;
-    public float idleTimer;
-    public float idleTimerBase = 0.1f;
+    
     internal void PortalClosed()
     {
-        //If emerging, start shooting
-        if (emerging)
+        if (waitingPortal)
         {
             moving = true;
             this.GetComponent<TakeDamage>().invulnerable = false;
-        } else
-        {
-            //this.Teleport();
-            this.transform.position = movePoints[Random.Range(0, movePoints.Length)].position;
-            this.animator.Play("Invisible");
-            _portal.Appear(this.transform);
-            idleTimer = idleTimerBase;
-            emerging = true;
         }
+        waitingPortal = false;
+
+        if (waitinClose)
+        {
+            _portal.Appear(this.transform);
+            waitinClose = false;
+            waitingPortal = true;
+         }
+    }
+
+    internal void FinishedRetiring()
+    {
+        this.transform.position = movePoints[Random.Range(0, movePoints.Length)].position;
+        waitingPortal = true;
+        emerging = true;
+        _portal.Disappear();
+        waitinClose = true;
+    }
+
+    internal void FinishedEmerging()
+    {
+        _portal.Disappear();
+        emerging = false;
+        
     }
 
     public Transform[] movePoints = default;
@@ -70,8 +85,10 @@ public class Boss : MonoBehaviour
 
         _portal = bossPortal.GetComponent<BossPortal>();
         _portal.Handle(this);
+        waitingPortal = true;
+        emerging = true;
         _portal.Appear(this.transform);
-        idleTimer = idleTimerBase;
+        
 
         target = movePoints[Random.Range(0, movePoints.Length)];
 		waitTimer = startWaitTime;
@@ -94,23 +111,17 @@ public class Boss : MonoBehaviour
 			float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 			transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            if (!moving)
+            if (waitingPortal || !moving)
             {
                 return;
             }
-            idleTimer -= Time.deltaTime;
-            if (idleTimer > 0)
-            {
-                return;
-            }
-            if (idleTimer < -10) { idleTimer = -10; }
-
+            
             if (this.GetComponent<TakeDamage>().health <= this.GetComponent<TakeDamage>().startHealth / 2 && !phase2)
             {
                 phase2 = true;
+                waitingPortal = true;
                 emerging = false;
                 _portal.Appear(this.transform);
-                idleTimer = idleTimerBase;
                 return;
             }
 

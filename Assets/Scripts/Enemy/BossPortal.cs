@@ -22,6 +22,13 @@ public class BossPortal : MonoBehaviour
         this.GetComponent<Animator>().Play("Appear");
     }
 
+    public void Disappear()
+    {
+        Debug.Log("Disappear portal");
+        this.GetComponent<Animator>().Play("Disappear");
+    }
+    
+
     private Boss boss;
     public void Handle(Boss boss)
     {
