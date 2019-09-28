@@ -136,7 +136,7 @@ public class CameraTracker : MonoBehaviour
         Camera.main.transform.position = mov;
     }
 
-    float padding = 15f;
+    float padding = 45f;
     private float GetZToViewX(float x)
     {
         var vl = x + padding;
