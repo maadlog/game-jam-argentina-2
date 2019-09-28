@@ -6,6 +6,7 @@ public class BossPortal : MonoBehaviour
 {
     public void SpawnBoss()
     {
+        Debug.Log("Portal Opened");
         boss?.PortalActive();
     }
 
