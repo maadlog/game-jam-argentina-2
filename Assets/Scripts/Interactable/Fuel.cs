@@ -5,7 +5,7 @@ using UnityEngine;
 public class Fuel : MonoBehaviour
 {
 	GameManager gameManager;
-
+    float lifetime = 25f;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -15,7 +15,11 @@ public class Fuel : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
+        this.lifetime -= Time.deltaTime;
+        if (lifetime <= 0)
+        {
+            Destroy(this.gameObject);
+        }
 	}
 
 
