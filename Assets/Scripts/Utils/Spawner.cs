@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
 
 
             //Generate random point
-            var offset = GetRandomOffset2D(6);
+            var offset = GetRandomOffset2D(Random.Range(5,12));
             // Add random point to the spawnerPoint to get the new position
             var spawnPosition = spawnPoints[spawnPointIndex] + offset;
             
