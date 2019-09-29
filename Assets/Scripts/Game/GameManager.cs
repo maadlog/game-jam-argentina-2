@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
 	{
-        score = 0;
+       
 
         Retomar();
 		isInGame = true;
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 			Destroy(this);
 		}
 
-		UpdateScore(0);
+		
 		lostText.enabled = false;
 
 		lostPanel.SetActive(false);
@@ -84,8 +84,10 @@ public class GameManager : MonoBehaviour
 
 	public void UpdateScore(int score)
 	{
-		this.score += score;
-	}
+        this.score = PlayerPrefs.GetInt("Score");
+        this.score += score;
+        PlayerPrefs.SetInt("Score", this.score);
+    }
 
 	public void ChangeLevel()
 	{
@@ -171,12 +173,11 @@ public class GameManager : MonoBehaviour
 
 	public void CalcularScore()
 	{
-        score = PlayerPrefs.GetInt("Score");
-        score = (refugees * 18) + (kills * 26);
-        PlayerPrefs.SetInt("Score", score);
+        UpdateScore((refugees * 18) + (kills * 26));
         LevelCompleted.GetComponent<LevelCompleted>().ShowKills(kills);
 		LevelCompleted.GetComponent<LevelCompleted>().ShowRefugees(refugees);
 		LevelCompleted.GetComponent<LevelCompleted>().ShowScore(score);
+
 	}
 
 	void Transiciones()
