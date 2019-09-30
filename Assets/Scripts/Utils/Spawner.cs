@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
 	public float timeToSpawn = 2f;
     public int spawnDistance = 12;
 
-    private Vector3[] spawnPoints; 
+    private Vector3[] spawnPoints;
 	private float timerToSpawn;
 
     // Start is called before the first frame update

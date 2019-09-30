@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	public float rotateSpeed = 1f;
 	public float shootColdDown = 2f;
 
+	public float shootEffectProportion = 0.6f;
 	public float allowedDistanceFromBase = 35f;
 
 	public GameObject bullet;
@@ -120,6 +121,11 @@ public class Player : MonoBehaviour
 			weaponHeat += Time.deltaTime;
 
 			var heatProportion = weaponHeat / weaponHeatLimit;
+
+			if(heatProportion > shootEffectProportion) {
+				cameraAnimator.Play("Shoot");
+			}
+
 			gunIndicator?.SetRate(heatProportion);
 			if (weaponHeat >= weaponHeatLimit)
 			{

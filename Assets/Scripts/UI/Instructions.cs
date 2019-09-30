@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Instructions : MonoBehaviour
 {
+    public float timeToDisapear = 5f;
+    
     private void Start()
     {
-        Destroy(gameObject, 10);
+        Destroy(gameObject, timeToDisapear);
     }
 }

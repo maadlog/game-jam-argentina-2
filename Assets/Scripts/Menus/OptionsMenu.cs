@@ -91,7 +91,7 @@ public class OptionsMenu : MonoBehaviour
 
 	void CheckEnterOption()
 	{
-		if (Input.GetButton("Submit"))
+		if (Input.GetButtonDown("Submit"))
 		{
 			options[indexOption].onClick.Invoke();
 		}

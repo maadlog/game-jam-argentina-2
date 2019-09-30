@@ -6,8 +6,10 @@ public class EnemySpawner : MonoBehaviour
     public GameObject prefab;
     public GameObject spawnPoint;
 
-    float enemyRate = 2; // 1 Enemies generated every 2 secs
-    float enemyDelay = 2; // Time delay to generate enemy
+    public GameObject[] spawnPoints;
+
+    public float enemyRate = 2; // 1 Enemies generated every 2 secs
+    public float enemyDelay = 2; // Time delay to generate enemy
 
     bool simultaneousSpawn;
 
@@ -15,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     float minimunEnemyRate = 0.6f; //Minimun rate for enemy spawnage
 
     public float portalSpawnDistance = 35f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     int spawnedInThisGeneration;
-    int deltaNextGeneration = 10;
+    public int deltaNextGeneration = 10;
     bool movingSpawn = false;
     // Update is called once per frame
     void Update()
@@ -60,16 +63,16 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
+            int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+            Vector3 spawnPosition = spawnPoints[spawnPointIndex].transform.position;
             //Generate random point in sphere centered on this Spawner
-            Vector3 newPosition = Random.onUnitSphere;
-            newPosition.z = 0;
+            Vector3 newPosition = Random.insideUnitCircle;
             newPosition = newPosition.normalized * portalSpawnDistance; // Normalize direction and get distance
 
-            spawnPoint.transform.position = newPosition;
+            spawnPoint.transform.position = spawnPosition + newPosition;
             spawnPoint.GetComponent<Animator>().Play("Appear");
             movingSpawn = false;
         }
-
     }
 
     private void StartMoveSpawnPoint()
@@ -82,7 +85,7 @@ public class EnemySpawner : MonoBehaviour
     private void ResetGenerationCounters()
     {
         spawnedInThisGeneration = 0;
-        deltaNextGeneration = Random.Range(8, 12);
+        // deltaNextGeneration = Random.Range(8, 12);
     }
 
     private void SpawnEnemy()
