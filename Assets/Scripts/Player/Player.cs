@@ -57,13 +57,14 @@ public class Player : MonoBehaviour
 			// set move boolean to state moving
 			animator.SetBool("isMoving", true);
 
+			Debug.Log(horizontal);
 			// handle rotation
-			transform.Rotate(0.0f, 0.0f, -horizontal * rotateSpeed);
+			transform.Rotate(0.0f, 0.0f, (vertical >= 0 ? -horizontal : horizontal) * rotateSpeed);
 
 			// handle foward or backwards
 			float moveVertical = vertical;
 			transform.position += moveVertical * transform.right * movementSpeed * Time.deltaTime;
-			transform.position = new Vector3(Mathf.Clamp(transform.position.x, -allowedDistanceFromBase, allowedDistanceFromBase), Mathf.Clamp(transform.position.y, -allowedDistanceFromBase, allowedDistanceFromBase));
+			// transform.position = new Vector3(Mathf.Clamp(transform.position.x, -allowedDistanceFromBase, allowedDistanceFromBase), Mathf.Clamp(transform.position.y, -allowedDistanceFromBase, allowedDistanceFromBase));
 		}
 		else
 		{
