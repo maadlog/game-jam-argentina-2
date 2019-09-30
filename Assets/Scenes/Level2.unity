@@ -7964,12 +7964,12 @@ PrefabInstance:
     - target: {fileID: 3587158199027079725, guid: 3e41097a9d8fe49e19c862150072f128,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 3587158199027079725, guid: 3e41097a9d8fe49e19c862150072f128,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 3587158199027079725, guid: 3e41097a9d8fe49e19c862150072f128,
         type: 3}
@@ -9685,6 +9685,26 @@ PrefabInstance:
       propertyPath: spawnPoints.Array.data[8]
       value: 
       objectReference: {fileID: 3235911503105280334}
+    - target: {fileID: 8652474053474547403, guid: af80003ea68b8424cb1ec2c3be32774f,
+        type: 3}
+      propertyPath: enemyRate
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652474053474547403, guid: af80003ea68b8424cb1ec2c3be32774f,
+        type: 3}
+      propertyPath: enemyDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652474053474547403, guid: af80003ea68b8424cb1ec2c3be32774f,
+        type: 3}
+      propertyPath: portalSpawnDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652474053474547403, guid: af80003ea68b8424cb1ec2c3be32774f,
+        type: 3}
+      propertyPath: deltaNextGeneration
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af80003ea68b8424cb1ec2c3be32774f, type: 3}
 --- !u!4 &2079267187 stripped
