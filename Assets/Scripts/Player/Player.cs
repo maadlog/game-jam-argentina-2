@@ -57,7 +57,6 @@ public class Player : MonoBehaviour
 			// set move boolean to state moving
 			animator.SetBool("isMoving", true);
 
-			Debug.Log(horizontal);
 			// handle rotation
 			transform.Rotate(0.0f, 0.0f, (vertical >= 0 ? -horizontal : horizontal) * rotateSpeed);
 
