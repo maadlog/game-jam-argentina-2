@@ -19,10 +19,11 @@ public class Bullet : MonoBehaviour
 		transform.position += transform.right * bulletSpeed * Time.deltaTime;
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision)
+	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (collision.gameObject.tag == "Bullet")
+		if (other.gameObject.CompareTag("EnemyBullet"))
 		{
+			Destroy(other.gameObject);
 			Destroy(gameObject);
 		}
 	}

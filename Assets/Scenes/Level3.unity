@@ -3943,11 +3943,6 @@ PrefabInstance:
       propertyPath: uiHealth
       value: 
       objectReference: {fileID: 222570632}
-    - target: {fileID: 4492089954427792273, guid: 666758f0aa7e4eb46a1e39a8a7239d9f,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 666758f0aa7e4eb46a1e39a8a7239d9f, type: 3}
 --- !u!1001 &1356297011137097561
