@@ -12,6 +12,7 @@ TagManager:
   - GunIndicator
   - PauseMenu
   - Enemy
+  - BossUI
   layers:
   - Default
   - TransparentFX

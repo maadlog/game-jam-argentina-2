@@ -49,17 +49,24 @@ public class Boss : MonoBehaviour, IDamageable
 
     internal void FinishedRetiring()
     {
-        this.transform.position = movePoints[Random.Range(0, movePoints.Length)].position;
+        if (this.transform != null)
+        {
+            this.transform.position = movePoints[Random.Range(0, movePoints.Length)].position;
+        }
         waitingPortal = true;
         emerging = true;
-        _portal.Disappear();
+        _portal?.Disappear();
         waitinClose = true;
     }
 
     internal void FinishedEmerging()
     {
-        _portal.Disappear();
+        _portal?.Disappear();
         emerging = false;
+        if (GameObject.FindGameObjectWithTag("BossUI") != null)
+        {
+            GameObject.FindGameObjectWithTag("BossUI").transform.localScale = new Vector3(1, 1, 1);
+        }
         
     }
 
@@ -85,11 +92,15 @@ public class Boss : MonoBehaviour, IDamageable
 
         
 
-        _portal = bossPortal.GetComponent<BossPortal>();
-        _portal.Handle(this);
+        _portal = bossPortal?.GetComponent<BossPortal>();
+        _portal?.Handle(this);
         waitingPortal = true;
         emerging = true;
-        _portal.Appear(this.transform);
+        if (GameObject.FindGameObjectWithTag("BossUI") != null)
+        {
+            GameObject.FindGameObjectWithTag("BossUI").transform.localScale = Vector3.zero;
+        }
+        _portal?.Appear(this.transform);
         
 
         target = movePoints[Random.Range(0, movePoints.Length)];
@@ -125,12 +136,18 @@ public class Boss : MonoBehaviour, IDamageable
                 return;
             }
             
-            if (this.GetComponent<TakeDamage>().health <= this.GetComponent<TakeDamage>().startHealth / 2 && !phase2)
+            if (this.GetComponent<TakeDamage>() != null
+                && this.GetComponent<TakeDamage>().health <= this.GetComponent<TakeDamage>().startHealth / 2
+                && !phase2)
             {
                 phase2 = true;
                 waitingPortal = true;
                 emerging = false;
-                _portal.Appear(this.transform);
+                if (GameObject.FindGameObjectWithTag("BossUI") != null)
+                {
+                    GameObject.FindGameObjectWithTag("BossUI").transform.localScale = Vector3.zero;
+                }
+                _portal?.Appear(this.transform);
                 return;
             }
 

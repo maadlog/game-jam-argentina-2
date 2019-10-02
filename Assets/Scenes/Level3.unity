@@ -4214,5 +4214,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5933877655966745588, guid: ef3bdc2647b7e4af99c13cce1411619a,
+        type: 3}
+      propertyPath: m_TagString
+      value: BossUI
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef3bdc2647b7e4af99c13cce1411619a, type: 3}
