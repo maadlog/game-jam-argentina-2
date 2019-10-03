@@ -2842,6 +2842,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
         type: 3}
+      propertyPath: spawnPoints.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
+        type: 3}
       propertyPath: gameObjectToSpawn
       value: 
       objectReference: {fileID: 1865137563816867525, guid: 19f55513d99954a4aa1f5998f6d3363b,
@@ -2849,13 +2854,43 @@ PrefabInstance:
     - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
         type: 3}
       propertyPath: timeToSpawn
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
         type: 3}
       propertyPath: spawnDistance
-      value: 25
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1561050329}
+    - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1377402829}
+    - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1068244367}
+    - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 2077253669}
+    - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 2121657313}
+    - target: {fileID: 8499142653000009348, guid: f3b0cc02e8d13764bafccb797acb568c,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 421784534}
     - target: {fileID: 1241334525707778001, guid: f3b0cc02e8d13764bafccb797acb568c,
         type: 3}
       propertyPath: m_LocalPosition.x

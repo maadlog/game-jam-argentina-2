@@ -10,13 +10,13 @@ public class Spawner : MonoBehaviour
 	public float timeToSpawn = 2f;
     public int spawnDistance = 12;
 
-    private Vector3[] spawnPoints;
+    public Transform[] spawnPoints;
 	private float timerToSpawn;
 
     // Start is called before the first frame update
     void Start()
 	{
-        InitializeSpawnPoints();
+        // InitializeSpawnPoints();
 	}
 
     private int spawnPointIndex;
@@ -27,13 +27,12 @@ public class Spawner : MonoBehaviour
 		{
 			// select random spawn point index
 			spawnPointIndex = Random.Range(0, spawnPoints.Length);
-
-
-            //Generate random point
-            var offset = GetRandomOffset2D(Random.Range(5,12));
             // Add random point to the spawnerPoint to get the new position
-            var spawnPosition = spawnPoints[spawnPointIndex] + offset;
-            
+            Vector3 spawnPosition = spawnPoints[spawnPointIndex].position;
+            //Generate random point in sphere centered on this Spawner
+            Vector3 randomCirclePosition = Random.insideUnitCircle;
+            spawnPosition += randomCirclePosition.normalized * spawnDistance; // Normalize direction and get distance
+
             Instantiate(gameObjectToSpawn, spawnPosition, Quaternion.identity);
 
 			// Reset timer
@@ -47,14 +46,14 @@ public class Spawner : MonoBehaviour
 
     //Generates a random array of Points arround the spawner
     // called only once on start
-    private void InitializeSpawnPoints()
-    {
-        var totalPoints = Random.Range(4, 7);
-        spawnPoints = Enumerable.Range(0, totalPoints).Select(i =>
-        {
-            return GetRandomOffset2D(spawnDistance);
-        }).ToArray();
-    }
+    // private void InitializeSpawnPoints()
+    // {
+    //     var totalPoints = Random.Range(4, 7);
+    //     spawnPoints = Enumerable.Range(0, totalPoints).Select(i =>
+    //     {
+    //         return GetRandomOffset2D(spawnDistance);
+    //     }).ToArray();
+    // }
 
     /// <summary>
     /// Generates a Random Vector3 with
