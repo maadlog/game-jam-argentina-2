@@ -60,32 +60,35 @@ public class OptionsMenu : MonoBehaviour
 
 	void CheckChangeSelectedOption()
 	{
-		if (timerAxis < 0f)
+		if (options.Length > 1)
 		{
-			if (Input.GetAxisRaw(movementAxis.ToString()) == 1)
+			if (timerAxis < 0f)
 			{
-				options[indexOption].transform.localScale = new Vector3(1, 1, 1);
-				indexOption++;
-			}
-			else if (Input.GetAxisRaw(movementAxis.ToString()) == -1)
-			{
-				options[indexOption].transform.localScale = new Vector3(1, 1, 1);
-				indexOption--;
-			}
+				if (Input.GetAxisRaw(movementAxis.ToString()) == 1)
+				{
+					options[indexOption].transform.localScale = new Vector3(1, 1, 1);
+					indexOption++;
+				}
+				else if (Input.GetAxisRaw(movementAxis.ToString()) == -1)
+				{
+					options[indexOption].transform.localScale = new Vector3(1, 1, 1);
+					indexOption--;
+				}
 
-			if (indexOption >= options.Length)
-			{
-				indexOption = 0;
+				if (indexOption >= options.Length)
+				{
+					indexOption = 0;
+				}
+				if (indexOption < 0)
+				{
+					indexOption = options.Length - 1;
+				}
+				timerAxis = axisColdDownTime;
 			}
-			if (indexOption < 0)
+			else
 			{
-				indexOption = options.Length - 1;
+				timerAxis -= Time.unscaledDeltaTime;
 			}
-			timerAxis = axisColdDownTime;
-		}
-		else
-		{
-			timerAxis -= Time.unscaledDeltaTime;
 		}
 	}
 
