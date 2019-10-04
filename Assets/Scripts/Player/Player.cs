@@ -22,12 +22,19 @@ public class Player : MonoBehaviour
 	System.Random random = new System.Random();
 	public AudioSource[] ShootSounds;
 
-	private Indicator gunIndicator { get; set; }
+	Indicator gunIndicator { get; set; }
+
+	// Axis and button strings to set with controller number
+	string horizontalInput;
+	string verticalInput;
+	string fireInput;
+	string fixAInput;
+	string fixBInput;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		//  ShootSound.GetComponent<AudioSource>();
+		SetControllerNumber(1);
 		cameraAnimator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
 		animator = GetComponent<Animator>();
 		shootTimer = shootColdDown;
@@ -45,12 +52,21 @@ public class Player : MonoBehaviour
 		Shoot();
 	}
 
+	public void SetControllerNumber(int controllerNumber)
+	{
+		horizontalInput = String.Format("P{0}Horizontal", controllerNumber);
+		verticalInput = String.Format("P{0}Vertical", controllerNumber);
+		fireInput = String.Format("P{0}Fire", controllerNumber);
+		fixAInput = String.Format("P{0}FixA", controllerNumber);
+		fixBInput = String.Format("P{0}FixB", controllerNumber);
+	}
+
 	void Movement()
 	{
 		// get input
 
-		float horizontal = Input.GetAxis("Horizontal");
-		float vertical = Input.GetAxis("Vertical");
+		float horizontal = Input.GetAxis(horizontalInput);
+		float vertical = Input.GetAxis(verticalInput);
 
 		if (horizontal != 0 || vertical != 0)
 		{
@@ -79,14 +95,12 @@ public class Player : MonoBehaviour
 
 	private bool Shooting()
 	{
-		return Input.GetKey(KeyCode.Space) || Input.GetAxisRaw("Fire1") == 1;
+		return Input.GetAxisRaw(fireInput) == 1;
 	}
 	private bool Fixing()
 	{
-		return Input.GetKey(KeyCode.Q)
-			|| Input.GetKey(KeyCode.E)
-			|| Input.GetButtonDown("FixA")   //Map to koystick L & R
-			|| Input.GetButtonDown("FixB");
+		return Input.GetButtonDown(fixAInput)   //Map to koystick L & R
+			|| Input.GetButtonDown(fixBInput);
 	}
 
 	private void FixedUpdate()
