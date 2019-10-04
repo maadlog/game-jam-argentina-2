@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
 	public Text lostText;
 	public GameObject lostPanel;
 
-
 	public Text CounterText;
 
 	int score = 0;
@@ -26,14 +25,17 @@ public class GameManager : MonoBehaviour
 	int kills;
 	public GameObject LevelCompleted;
 	public bool isInGame;
-   bool end;
-    float timer = 0.8f;
-    // Start is called before the first frame update
-    void Awake()
-	{
-       
+	bool end;
+	float timer = 0.8f;
 
-        Retomar();
+	Manager manager;
+	public Transform[] playerSpawnPoints;
+	public GameObject playerPrefab;
+
+	// Start is called before the first frame update
+	void Awake()
+	{
+		Retomar();
 		isInGame = true;
 		// set time to timer
 		menuTimer = timeToMoveToMenu;
@@ -49,12 +51,13 @@ public class GameManager : MonoBehaviour
 			Destroy(this);
 		}
 
-		
 		lostText.enabled = false;
 
 		lostPanel.SetActive(false);
-      
-    }
+
+		manager = Manager.GetInstance();
+		CreatePlayers();
+	}
 
 	// Update is called once per frame
 	void Update()
@@ -66,16 +69,16 @@ public class GameManager : MonoBehaviour
 
 		}
 
-        if (end == true)
-        {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                GameOver();
-            }
+		if (end == true)
+		{
+			timer -= Time.deltaTime;
+			if (timer <= 0)
+			{
+				GameOver();
+			}
 
-        }
-    }
+		}
+	}
 
 	public static GameManager getGameManager()
 	{
@@ -84,40 +87,40 @@ public class GameManager : MonoBehaviour
 
 	public void UpdateScore(int score)
 	{
-        this.score = PlayerPrefs.GetInt("Score");
-        this.score += score;
-        PlayerPrefs.SetInt("Score", this.score);
-    }
+		this.score = PlayerPrefs.GetInt("Score");
+		this.score += score;
+		PlayerPrefs.SetInt("Score", this.score);
+	}
 
 	public void ChangeLevel()
 	{
 		SceneManager.LoadScene(GameObject.FindObjectOfType<NextLevel>().nextLevel);
 	}
 
-    void GameOver()
-    {
-        isInGame = false;
-        // show message
-        lostText.enabled = true;
-        lostPanel.SetActive(true);
-        // player cant move
+	void GameOver()
+	{
+		isInGame = false;
+		// show message
+		lostText.enabled = true;
+		lostPanel.SetActive(true);
+		// player cant move
 
-        // go to menu after a while
-        if (menuTimer < 0)
-        {
-            SceneManager.LoadScene("Menu");
-        }
-        else
-        {
-            menuTimer -= Time.deltaTime;
-        }
-    }
+		// go to menu after a while
+		if (menuTimer < 0)
+		{
+			SceneManager.LoadScene("Menu");
+		}
+		else
+		{
+			menuTimer -= Time.deltaTime;
+		}
+	}
 
 	public void LostLevel()
 	{
-        lostText.enabled = true;
-        end =true;
-		
+		lostText.enabled = true;
+		end = true;
+
 	}
 
 	public void UpdateCounter(int counter)
@@ -140,23 +143,23 @@ public class GameManager : MonoBehaviour
 		LevelCompleted.GetComponent<LevelCompleted>().WinLevel();
 
 	}
-    int bosses = 1;
-    public void RegisterBoss()
-    {
-        bosses++;
-    }
-    
-    public void BossDefeated()
-    {
-        bosses--;
-        if (bosses <= 0)
-        {
-            Win();
-        }
-    }
+	int bosses = 1;
+	public void RegisterBoss()
+	{
+		bosses++;
+	}
+
+	public void BossDefeated()
+	{
+		bosses--;
+		if (bosses <= 0)
+		{
+			Win();
+		}
+	}
 
 
-    public void PlaySoundExplosion()
+	public void PlaySoundExplosion()
 	{
 		explotionSound.Play();
 	}
@@ -173,8 +176,8 @@ public class GameManager : MonoBehaviour
 
 	public void CalcularScore()
 	{
-        UpdateScore((refugees * 18) + (kills * 26));
-        LevelCompleted.GetComponent<LevelCompleted>().ShowKills(kills);
+		UpdateScore((refugees * 18) + (kills * 26));
+		LevelCompleted.GetComponent<LevelCompleted>().ShowKills(kills);
 		LevelCompleted.GetComponent<LevelCompleted>().ShowRefugees(refugees);
 		LevelCompleted.GetComponent<LevelCompleted>().ShowScore(score);
 
@@ -189,5 +192,12 @@ public class GameManager : MonoBehaviour
 		Time.timeScale = 1f;
 	}
 
-
+	void CreatePlayers()
+	{
+		for (int i = 0; i < manager.Players; i++)
+		{
+			GameObject player = Instantiate(playerPrefab, playerSpawnPoints[i].position, Quaternion.identity);
+			player.GetComponent<Player>().SetControllerNumber(i + 1);
+		}
+	}
 }

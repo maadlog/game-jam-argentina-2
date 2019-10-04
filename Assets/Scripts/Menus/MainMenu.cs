@@ -5,8 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-	public void PlayGame()
+	Manager manager;
+
+	void Awake() {
+		manager = Manager.GetInstance();;
+	}
+
+	public void PlayGame(int players)
 	{
+		manager.Score = 0;
+		manager.Players = players;
 		SceneManager.LoadScene(1);
 	}
 

@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		SetControllerNumber(1);
 		cameraAnimator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
 		animator = GetComponent<Animator>();
 		shootTimer = shootColdDown;
