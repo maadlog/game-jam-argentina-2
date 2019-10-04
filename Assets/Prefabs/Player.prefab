@@ -306,6 +306,9 @@ MonoBehaviour:
   shootEffectProportion: 0.6
   allowedDistanceFromBase: 35
   bullet: {fileID: 4334897589421178503, guid: 70b71548a1613194dacdff23ec871f64, type: 3}
+  guns:
+  - {fileID: 8737942957686502754}
+  - {fileID: 431929990}
   ShootSounds:
   - {fileID: 689446364}
   - {fileID: 689446365}

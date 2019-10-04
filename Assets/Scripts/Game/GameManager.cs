@@ -198,6 +198,10 @@ public class GameManager : MonoBehaviour
 		{
 			GameObject player = Instantiate(playerPrefab, playerSpawnPoints[i].position, Quaternion.identity);
 			player.GetComponent<Player>().SetControllerNumber(i + 1);
+			if (i == 1)
+			{
+				player.GetComponentInChildren<SpriteRenderer>().color = Color.cyan;
+			}
 		}
 	}
 }

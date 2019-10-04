@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 	public float allowedDistanceFromBase = 35f;
 
 	public GameObject bullet;
+	public GameObject[] guns;
 
 	float shootTimer;
 	Animator cameraAnimator;
@@ -175,7 +176,7 @@ public class Player : MonoBehaviour
 
 			var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
 
-			foreach (GameObject gun in GameObject.FindGameObjectsWithTag("Gun"))
+			foreach (GameObject gun in guns)
 			{
 				var intDisplace = UnityEngine.Random.Range(0f, .1f) * sign;
 				var disp = intDisplace * heatProportion;
