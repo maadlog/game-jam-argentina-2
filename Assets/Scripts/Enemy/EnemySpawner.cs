@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        MoveSpawnPointToRandom();
     }
 
     int spawnedInThisGeneration;
@@ -63,16 +63,21 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            int spawnPointIndex = Random.Range(0, spawnPoints.Length);
-            Vector3 spawnPosition = spawnPoints[spawnPointIndex].transform.position;
-            //Generate random point in sphere centered on this Spawner
-            Vector3 newPosition = Random.insideUnitCircle;
-            newPosition = newPosition.normalized * portalSpawnDistance; // Normalize direction and get distance
-
-            spawnPoint.transform.position = spawnPosition + newPosition;
-            spawnPoint.GetComponent<Animator>().Play("Appear");
-            movingSpawn = false;
+            MoveSpawnPointToRandom();
         }
+    }
+
+    private void MoveSpawnPointToRandom()
+    {
+        int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+        Vector3 spawnPosition = spawnPoints[spawnPointIndex].transform.position;
+        //Generate random point in sphere centered on this Spawner
+        Vector3 newPosition = Random.insideUnitCircle;
+        newPosition = newPosition.normalized * portalSpawnDistance; // Normalize direction and get distance
+
+        spawnPoint.transform.position = spawnPosition + newPosition;
+        spawnPoint.GetComponent<Animator>().Play("Appear");
+        movingSpawn = false;
     }
 
     private void StartMoveSpawnPoint()
