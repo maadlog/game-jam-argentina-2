@@ -22,10 +22,7 @@ public class PointDispatcher
 
             if (onUse.ContainsKey(requester))
             {
-                int index = onUse[requester];
-                Vector3 point = pointsOnUse[index];
-                pointsOnUse.RemoveAt(index);
-                points.Add(point);
+                RecycleCurrentPoint(requester);
             }
 
             pointsOnUse.Add(result);
@@ -33,6 +30,19 @@ public class PointDispatcher
             onUse[requester] = pointsOnUse.IndexOf(result);
 
             return result; // Normalize direction and get distance
+        }
+
+        private void RecycleCurrentPoint(int requester)
+        {
+            int index = onUse[requester];
+            Vector3 point = pointsOnUse[index];
+            pointsOnUse.RemoveAt(index);
+            points.Add(point);
+        }
+
+        public void Reset(int requester)
+        {
+            RecycleCurrentPoint(requester);
         }
     }
 
@@ -54,6 +64,10 @@ public class PointDispatcher
 
             return spawnPosition + randomCirclePosition.normalized * spawnDistance; // Normalize direction and get distance
         }
+        public void Reset(int requester)
+        {
+            //Do nothing
+        }
     }
 
     public class RandomAtFixedDistanceFromPoints : IPointDispatcherStrategy
@@ -74,6 +88,11 @@ public class PointDispatcher
 
             return spawnPosition + randomCirclePosition.normalized * spawnDistance; // Normalize direction and get distance
         }
+
+        public void Reset(int requester)
+        {
+            //Do nothing
+        }
     }
 
 
@@ -87,10 +106,15 @@ public class PointDispatcher
     {
         return this.strategy.GetNextPoint(requester);
     }
+    public void Reset(int requester = 0)
+    {
+        this.strategy.Reset(requester);
+    }
 }
 public interface IPointDispatcherStrategy
 {
     Vector3 GetNextPoint(int requester);
+    void Reset(int requester);
 }
 
 
