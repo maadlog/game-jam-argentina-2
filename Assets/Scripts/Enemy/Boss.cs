@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class Boss : MonoBehaviour, IDamageable
 {
@@ -13,15 +14,16 @@ public class Boss : MonoBehaviour, IDamageable
     public GameObject fullBossPrefab;
     public int generateChildrens = 2;
 
+    #region Animations
     internal void PortalActive()
     {
         //If emerging or not, play animation and stop shooting
-        if (emerging)
+        if (emerging && animator.isActiveAndEnabled)
         {
-            this.animator?.Play("Emerge");
+            animator.Play("Emerge");
         } else
         {
-            this.animator?.Play("Retire");
+            animator.Play("Retire");
         }
 
         moving = false;
@@ -70,13 +72,20 @@ public class Boss : MonoBehaviour, IDamageable
         
     }
 
+    #endregion
+
+
+    public int BossId = 0;
+
+    public PointDispatcher pointDispatcher;
+
     public Transform[] movePoints = default;
 	public GameObject bullet;
 	public Transform gun;
     public GameObject bossPortal;
     private BossPortal _portal;
 
-	Transform target;
+	Vector3 target;
 	float waitTimer;
 	float shootTimer;
 
@@ -90,7 +99,11 @@ public class Boss : MonoBehaviour, IDamageable
 		animator = GetComponentInChildren<Animator>();
 		baseTarget = GameObject.FindObjectOfType<Base>();
 
-        
+        pointDispatcher = new PointDispatcher(
+            new PointDispatcher.RandomPointFromArraySet(
+                movePoints.Select(x => x.position)
+            )
+        );
 
         _portal = bossPortal?.GetComponent<BossPortal>();
         _portal?.Handle(this);
@@ -101,9 +114,9 @@ public class Boss : MonoBehaviour, IDamageable
             GameObject.FindGameObjectWithTag("BossUI").transform.localScale = Vector3.zero;
         }
         _portal?.Appear(this.transform);
-        
 
-        target = movePoints[Random.Range(0, movePoints.Length)];
+
+        target = pointDispatcher.GetNextPoint(this.BossId);
 		waitTimer = startWaitTime;
 	}
 
@@ -151,20 +164,20 @@ public class Boss : MonoBehaviour, IDamageable
                 return;
             }
 
-            if (Vector2.Distance(transform.position, target.position) > 0.2f)
+            if (Vector2.Distance(transform.position, target) > 0.2f)
 			{
 				animator?.SetBool("isMoving", true);
 			}
 
 			transform.position =
-				Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-			if (Vector2.Distance(transform.position, target.position) < 0.2f)
+				Vector2.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
+			if (Vector2.Distance(transform.position, target) < 0.2f)
 			{
 				animator?.SetBool("isMoving", false);
                 
 				if (waitTimer <= 0f)
 				{
-					target = movePoints[Random.Range(0, movePoints.Length)];
+                    target = pointDispatcher.GetNextPoint(this.BossId);
 					waitTimer = startWaitTime;
 					shootTimer = shootWaitTime;
 				}
@@ -205,13 +218,14 @@ public class Boss : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        Destroy(gameObject);
         if (generateChildrens > 0)
         {
             GameManager.getGameManager().RegisterBoss();
             GameManager.getGameManager().RegisterBoss();
 
             var miniboss = Instantiate(fullBossPrefab, Vector3.zero, Quaternion.identity);
+            miniboss.GetComponentInChildren<Boss>().transform.position = pointDispatcher.GetNextPoint(this.BossId);
+            miniboss.GetComponentInChildren<Boss>().BossId = this.BossId * 10 + 1;
             miniboss.GetComponentInChildren<Boss>().generateChildrens = generateChildrens - 1;
             miniboss.GetComponentInChildren<Boss>().shoots = shoots - 1;
             miniboss.GetComponentInChildren<Boss>().transform.localScale = this.transform.localScale * 0.8f;
@@ -219,12 +233,16 @@ public class Boss : MonoBehaviour, IDamageable
             miniboss.GetComponentInChildren<Boss>().SetHealth(Mathf.RoundToInt( this.GetComponent<TakeDamage>().startHealth / 2));
 
             miniboss = Instantiate(fullBossPrefab, Vector3.zero, Quaternion.identity);
+            miniboss.GetComponentInChildren<Boss>().transform.position = pointDispatcher.GetNextPoint(this.BossId);
+            miniboss.GetComponentInChildren<Boss>().BossId = this.BossId * 10 + 2;
             miniboss.GetComponentInChildren<Boss>().generateChildrens = generateChildrens - 1;
             miniboss.GetComponentInChildren<Boss>().shoots = shoots - 1;
             miniboss.GetComponentInChildren<Boss>().fullBossPrefab = fullBossPrefab;
             miniboss.GetComponentInChildren<Boss>().transform.localScale = this.transform.localScale * 0.8f;
             miniboss.GetComponentInChildren<Boss>().SetHealth(Mathf.RoundToInt(this.GetComponent<TakeDamage>().startHealth / 2));
         }
+        Destroy(GetComponentInParent<TaggingScript>().gameObject);
+       
         GameManager.getGameManager().BossDefeated();
         
     }

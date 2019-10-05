@@ -89,8 +89,8 @@ public class Player : MonoBehaviour
 	}
 
 	bool isStaggered = false;
-	public float weaponHeatLimit = 4f;
 	float weaponHeat = 0f;
+	public float weaponHeatLimit = 4f;
 	public float weaponCoolOffTimeRate = 0.5f;
     public float weaponCoolOffOnFix = 0.1f;
 
