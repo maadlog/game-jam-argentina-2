@@ -89,11 +89,12 @@ public class Player : MonoBehaviour
 	}
 
 	bool isStaggered = false;
-	float weaponHeatLimit = 4f;
+	public float weaponHeatLimit = 4f;
 	float weaponHeat = 0f;
-	float weaponCoolOffRate = 0.5f;
+	public float weaponCoolOffTimeRate = 0.5f;
+    public float weaponCoolOffOnFix = 0.1f;
 
-	private bool Shooting()
+    private bool Shooting()
 	{
 		return Input.GetAxisRaw(fireInput) == 1;
 	}
@@ -113,11 +114,11 @@ public class Player : MonoBehaviour
 			}
 			if (Fixing())
 			{
-				weaponHeat -= Time.deltaTime * (2 + weaponCoolOffRate);
+				weaponHeat -= weaponCoolOffOnFix;
 			}
 			else
 			{
-				weaponHeat -= Time.deltaTime * weaponCoolOffRate;
+				weaponHeat -= Time.deltaTime * weaponCoolOffTimeRate;
 			}
 			if (weaponHeat <= 0)
 			{
@@ -153,7 +154,7 @@ public class Player : MonoBehaviour
 		{
 			if (!Shooting())
 			{
-				weaponHeat -= Time.deltaTime * weaponCoolOffRate;
+				weaponHeat -= Time.deltaTime * weaponCoolOffTimeRate;
 				if (weaponHeat <= 0)
 				{
 					weaponHeat = 0;
