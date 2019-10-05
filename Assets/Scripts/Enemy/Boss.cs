@@ -18,10 +18,10 @@ public class Boss : MonoBehaviour, IDamageable
         //If emerging or not, play animation and stop shooting
         if (emerging)
         {
-            this.animator.Play("Emerge");
+            this.animator?.Play("Emerge");
         } else
         {
-            this.animator.Play("Retire");
+            this.animator?.Play("Retire");
         }
 
         moving = false;
@@ -153,14 +153,14 @@ public class Boss : MonoBehaviour, IDamageable
 
             if (Vector2.Distance(transform.position, target.position) > 0.2f)
 			{
-				animator.SetBool("isMoving", true);
+				animator?.SetBool("isMoving", true);
 			}
 
 			transform.position =
 				Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
 			if (Vector2.Distance(transform.position, target.position) < 0.2f)
 			{
-				animator.SetBool("isMoving", false);
+				animator?.SetBool("isMoving", false);
                 
 				if (waitTimer <= 0f)
 				{
