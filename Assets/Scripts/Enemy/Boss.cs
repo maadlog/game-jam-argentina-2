@@ -11,8 +11,9 @@ public class Boss : MonoBehaviour, IDamageable
     private bool waitingPortal;
     private bool waitinClose;
 
-    public GameObject fullBossPrefab;
     public int generateChildrens = 2;
+
+    private TakeDamage damageComponent;
 
     #region Animations
     internal void PortalActive()
@@ -98,6 +99,7 @@ public class Boss : MonoBehaviour, IDamageable
 	{
 		animator = GetComponentInChildren<Animator>();
 		baseTarget = GameObject.FindObjectOfType<Base>();
+        damageComponent = this.GetComponent<TakeDamage>();
         if (pointDispatcher == null)
         {
             pointDispatcher = new PointDispatcher(
@@ -226,30 +228,30 @@ public class Boss : MonoBehaviour, IDamageable
         {
             GameManager.getGameManager().RegisterBoss();
             GameManager.getGameManager().RegisterBoss();
-            int newBossId = this.BossId * 10 + 2;
+            int newBossId = this.BossId * 10 + 1;
+            int newHealth = Mathf.RoundToInt( damageComponent.startHealth / 2);
 
-            var miniboss = Instantiate(fullBossPrefab, Vector3.zero, Quaternion.identity);
-            miniboss.GetComponentInChildren<Boss>().pointDispatcher = pointDispatcher;
-            miniboss.GetComponentInChildren<Boss>().transform.position = pointDispatcher.GetNextPoint(newBossId);
-            miniboss.GetComponentInChildren<Boss>().BossId = newBossId;
-            miniboss.GetComponentInChildren<Boss>().generateChildrens = generateChildrens - 1;
-            miniboss.GetComponentInChildren<Boss>().shoots = shoots - 1;
-            miniboss.GetComponentInChildren<Boss>().transform.localScale = this.transform.localScale * 0.8f;
-            miniboss.GetComponentInChildren<Boss>().fullBossPrefab = fullBossPrefab;
-            miniboss.GetComponentInChildren<Boss>().SetHealth(Mathf.RoundToInt( this.GetComponent<TakeDamage>().startHealth / 2));
+            var miniboss = Instantiate(GameManager.getGameManager().BossPrefab, Vector3.zero, Quaternion.identity);
+            var minibossDirector = miniboss.GetComponentInChildren<Boss>();
+            minibossDirector.pointDispatcher = pointDispatcher;
+            minibossDirector.transform.position = pointDispatcher.GetNextPoint(newBossId);
+            minibossDirector.BossId = newBossId;
+            minibossDirector.generateChildrens = generateChildrens - 1;
+            minibossDirector.shoots = shoots - 1;
+            minibossDirector.transform.localScale = this.transform.localScale * 0.8f;
+            minibossDirector.SetHealth(newHealth);
 
             newBossId = this.BossId * 10 + 2;
-            miniboss = Instantiate(fullBossPrefab, Vector3.zero, Quaternion.identity);
-            miniboss.GetComponentInChildren<Boss>().pointDispatcher = pointDispatcher;
-            miniboss.GetComponentInChildren<Boss>().transform.position = pointDispatcher.GetNextPoint(newBossId);
-            miniboss.GetComponentInChildren<Boss>().BossId = newBossId;
-            miniboss.GetComponentInChildren<Boss>().generateChildrens = generateChildrens - 1;
-            miniboss.GetComponentInChildren<Boss>().shoots = shoots - 1;
-            miniboss.GetComponentInChildren<Boss>().fullBossPrefab = fullBossPrefab;
-            miniboss.GetComponentInChildren<Boss>().transform.localScale = this.transform.localScale * 0.8f;
-            miniboss.GetComponentInChildren<Boss>().SetHealth(Mathf.RoundToInt(this.GetComponent<TakeDamage>().startHealth / 2));
+            miniboss = Instantiate(GameManager.getGameManager().BossPrefab, Vector3.zero, Quaternion.identity);
+            minibossDirector = miniboss.GetComponentInChildren<Boss>();
+            minibossDirector.pointDispatcher = pointDispatcher;
+            minibossDirector.transform.position = pointDispatcher.GetNextPoint(newBossId);
+            minibossDirector.BossId = newBossId;
+            minibossDirector.generateChildrens = generateChildrens - 1;
+            minibossDirector.shoots = shoots - 1;
+            minibossDirector.transform.localScale = this.transform.localScale * 0.8f;
+            minibossDirector.SetHealth(newHealth);
             
-
             pointDispatcher.Reset(this.BossId);
         }
         Destroy(GetComponentInParent<TaggingScript>().gameObject);

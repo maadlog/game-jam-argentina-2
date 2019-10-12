@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 	bool end;
 	float timer = 0.8f;
 
+	public GameObject BossPrefab;
+
 	Manager manager;
 	public Transform[] playerSpawnPoints;
 	public GameObject playerPrefab;

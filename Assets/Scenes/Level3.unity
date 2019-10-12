@@ -514,6 +514,8 @@ MonoBehaviour:
   enemyDeathSound: {fileID: 174046682}
   LevelCompleted: {fileID: 314813265}
   isInGame: 0
+  BossPrefab: {fileID: 9220492840417106902, guid: ef3bdc2647b7e4af99c13cce1411619a,
+    type: 3}
   playerSpawnPoints:
   - {fileID: 1012658113}
   - {fileID: 1021100462}

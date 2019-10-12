@@ -6,43 +6,46 @@ public class PointDispatcher
 {
     public class RandomPointFromArraySet: IPointDispatcherStrategy
     {
-        public Dictionary<int, int> onUse = new Dictionary<int, int>();
-        public List<Vector3> points;
-        private List<Vector3> pointsOnUse = new List<Vector3>();
+
+        public List<Vector3> AvailablePoints;
+        public Dictionary<int, Vector3> TakenPoints;
+       
         public RandomPointFromArraySet(IEnumerable<Vector3> points)
         {
-            this.points = points.ToList();
+            this.AvailablePoints = points.ToList();
+            this.TakenPoints = new Dictionary<int, Vector3>();
         }
 
         public Vector3 GetNextPoint(int requester)
         {
-            Vector3 result;
+            Vector3 newPoint = GetAvailablePoint();
             
-            result = points[Random.Range(0, points.Count)];
+            ResetPointFor(requester);
+            
+            MarkPointTakenBy(requester, newPoint);
 
-            if (onUse.ContainsKey(requester))
-            {
-                RecycleCurrentPoint(requester);
+            return newPoint;
+        }
+
+        private Vector3 GetAvailablePoint() {
+            return this.AvailablePoints.ElementAt(Random.Range(0,this.AvailablePoints.Count));
+        }
+        private void ResetPointFor(int requester) {
+            if (TakenPoints.ContainsKey(requester)){
+                Vector3 point = TakenPoints[requester];
+                AvailablePoints.Add(point);
+                TakenPoints.Remove(requester);
             }
-
-            pointsOnUse.Add(result);
-            points.Remove(result);
-            onUse[requester] = pointsOnUse.IndexOf(result);
-
-            return result; // Normalize direction and get distance
+        }
+        private void MarkPointTakenBy(int requester,Vector3 point){
+            AvailablePoints.Remove(point);
+            TakenPoints.Add(requester, point);
         }
 
-        private void RecycleCurrentPoint(int requester)
-        {
-            int index = onUse[requester];
-            Vector3 point = pointsOnUse[index];
-            pointsOnUse.RemoveAt(index);
-            points.Add(point);
-        }
 
         public void Reset(int requester)
         {
-            RecycleCurrentPoint(requester);
+            ResetPointFor(requester);
         }
     }
 

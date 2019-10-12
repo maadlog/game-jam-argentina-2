@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b9d3ede56ff314b809d96efdd88942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  movementSpeed: 8
   rotateSpeed: 3
   shootColdDown: 0.1
   shootEffectProportion: 0.6
@@ -314,6 +314,9 @@ MonoBehaviour:
   - {fileID: 689446365}
   - {fileID: 689446366}
   - {fileID: 689446367}
+  weaponHeatLimit: 4
+  weaponCoolOffTimeRate: 0.5
+  weaponCoolOffOnFix: 0.1
 --- !u!82 &689446364
 AudioSource:
   m_ObjectHideFlags: 0
