@@ -62,7 +62,6 @@ public class Dialog : MonoBehaviour
         } 
     }
 
-    private bool BreakCorroutines = false;
 
     IEnumerator Type() //Coroutine que escribe caracter por caracter.
     { //Parte del codigo que escribe
