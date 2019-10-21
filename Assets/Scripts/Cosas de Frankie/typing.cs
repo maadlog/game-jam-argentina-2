@@ -19,7 +19,7 @@ public class typing : MonoBehaviour
         
     }
      private void Update() {
-        if(textDisplay.text == sentences{index})
+        if(textDisplay.text == sentences[index])
         {
             button.SetActive(true);
         }
@@ -33,10 +33,7 @@ public class typing : MonoBehaviour
         {
             textDisplay.text += letter;
             yield return new WaitForSeconds(typeSpeed);
-
         }
-
-        
     }
 
     public void nextScentence()
