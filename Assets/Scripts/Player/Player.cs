@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 	public float allowedDistanceFromBase = 35f;
 
 	public GameObject bullet;
+	public GameObject[] guns;
 
 	float shootTimer;
 	Animator cameraAnimator;
@@ -22,12 +23,18 @@ public class Player : MonoBehaviour
 	System.Random random = new System.Random();
 	public AudioSource[] ShootSounds;
 
-	private Indicator gunIndicator { get; set; }
+	Indicator gunIndicator { get; set; }
+
+	// Axis and button strings to set with controller number
+	string horizontalInput;
+	string verticalInput;
+	string fireInput;
+	string fixAInput;
+	string fixBInput;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		//  ShootSound.GetComponent<AudioSource>();
 		cameraAnimator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
 		animator = GetComponent<Animator>();
 		shootTimer = shootColdDown;
@@ -45,12 +52,21 @@ public class Player : MonoBehaviour
 		Shoot();
 	}
 
+	public void SetControllerNumber(int controllerNumber)
+	{
+		horizontalInput = String.Format("P{0}Horizontal", controllerNumber);
+		verticalInput = String.Format("P{0}Vertical", controllerNumber);
+		fireInput = String.Format("P{0}Fire", controllerNumber);
+		fixAInput = String.Format("P{0}FixA", controllerNumber);
+		fixBInput = String.Format("P{0}FixB", controllerNumber);
+	}
+
 	void Movement()
 	{
 		// get input
 
-		float horizontal = Input.GetAxis("Horizontal");
-		float vertical = Input.GetAxis("Vertical");
+		float horizontal = Input.GetAxis(horizontalInput);
+		float vertical = Input.GetAxis(verticalInput);
 
 		if (horizontal != 0 || vertical != 0)
 		{
@@ -73,20 +89,19 @@ public class Player : MonoBehaviour
 	}
 
 	bool isStaggered = false;
-	float weaponHeatLimit = 4f;
 	float weaponHeat = 0f;
-	float weaponCoolOffRate = 0.5f;
+	public float weaponHeatLimit = 4f;
+	public float weaponCoolOffTimeRate = 0.5f;
+    public float weaponCoolOffOnFix = 0.1f;
 
-	private bool Shooting()
+    private bool Shooting()
 	{
-		return Input.GetKey(KeyCode.Space) || Input.GetAxisRaw("Fire1") == 1;
+		return Input.GetAxisRaw(fireInput) == 1;
 	}
 	private bool Fixing()
 	{
-		return Input.GetKey(KeyCode.Q)
-			|| Input.GetKey(KeyCode.E)
-			|| Input.GetButtonDown("FixA")   //Map to koystick L & R
-			|| Input.GetButtonDown("FixB");
+		return Input.GetButtonDown(fixAInput)   //Map to koystick L & R
+			|| Input.GetButtonDown(fixBInput);
 	}
 
 	private void FixedUpdate()
@@ -99,11 +114,11 @@ public class Player : MonoBehaviour
 			}
 			if (Fixing())
 			{
-				weaponHeat -= Time.deltaTime * (2 + weaponCoolOffRate);
+				weaponHeat -= weaponCoolOffOnFix;
 			}
 			else
 			{
-				weaponHeat -= Time.deltaTime * weaponCoolOffRate;
+				weaponHeat -= Time.deltaTime * weaponCoolOffTimeRate;
 			}
 			if (weaponHeat <= 0)
 			{
@@ -139,7 +154,7 @@ public class Player : MonoBehaviour
 		{
 			if (!Shooting())
 			{
-				weaponHeat -= Time.deltaTime * weaponCoolOffRate;
+				weaponHeat -= Time.deltaTime * weaponCoolOffTimeRate;
 				if (weaponHeat <= 0)
 				{
 					weaponHeat = 0;
@@ -162,7 +177,7 @@ public class Player : MonoBehaviour
 
 			var sign = (int)Math.Round(UnityEngine.Random.Range(-1f, 1f), 0);
 
-			foreach (GameObject gun in GameObject.FindGameObjectsWithTag("Gun"))
+			foreach (GameObject gun in guns)
 			{
 				var intDisplace = UnityEngine.Random.Range(0f, .1f) * sign;
 				var disp = intDisplace * heatProportion;

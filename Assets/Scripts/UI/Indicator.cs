@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Indicator : MonoBehaviour
 {
     public GameObject mask;
+    public GameObject hint;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,10 +28,12 @@ public class Indicator : MonoBehaviour
         if (proportion >= 1)
         {
             mask.GetComponent<Image>().color = cappedColor;
+            hint.transform.localScale = new Vector3(1, 1, 1);
         }
         if (proportion <= 0)
         {
             mask.GetComponent<Image>().color = originalColor;
+            hint.transform.localScale = Vector3.zero;
         }
 
         var eulerAngle = proportion * -Mathf.PI;

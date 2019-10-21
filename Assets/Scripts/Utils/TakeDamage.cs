@@ -22,11 +22,13 @@ public class TakeDamage : MonoBehaviour
 
     GameObject owner;
 
+	IDamageable target;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		health = startHealth;
+		target = this.GetComponent<IDamageable>();
 	}
 
 	// Update is called once per frame
@@ -65,7 +67,6 @@ public class TakeDamage : MonoBehaviour
 		else
 		{
 			Kill();
-
 		}
 
 		Instantiate(damageParticles, transform.position, Quaternion.identity);
@@ -73,8 +74,9 @@ public class TakeDamage : MonoBehaviour
 
 	void Kill()
 	{
-        this.GetComponent<IDamageable>().Die();
-		
-
+		if (target != null) {
+			target.Die();
+		}
+        
     }
 }

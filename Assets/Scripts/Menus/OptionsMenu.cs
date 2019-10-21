@@ -64,12 +64,12 @@ public class OptionsMenu : MonoBehaviour
 		{
 			if (timerAxis < 0f)
 			{
-				if (Input.GetAxisRaw(movementAxis.ToString()) == 1)
+				if (Input.GetAxisRaw(movementAxis.ToString()) == -1)
 				{
 					options[indexOption].transform.localScale = new Vector3(1, 1, 1);
 					indexOption++;
 				}
-				else if (Input.GetAxisRaw(movementAxis.ToString()) == -1)
+				else if (Input.GetAxisRaw(movementAxis.ToString()) == 1)
 				{
 					options[indexOption].transform.localScale = new Vector3(1, 1, 1);
 					indexOption--;

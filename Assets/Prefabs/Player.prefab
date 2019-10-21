@@ -300,17 +300,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b9d3ede56ff314b809d96efdd88942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  movementSpeed: 6
   rotateSpeed: 3
   shootColdDown: 0.1
   shootEffectProportion: 0.6
   allowedDistanceFromBase: 35
   bullet: {fileID: 4334897589421178503, guid: 70b71548a1613194dacdff23ec871f64, type: 3}
+  guns:
+  - {fileID: 8737942957686502754}
+  - {fileID: 431929990}
   ShootSounds:
   - {fileID: 689446364}
   - {fileID: 689446365}
   - {fileID: 689446366}
   - {fileID: 689446367}
+  weaponHeatLimit: 4
+  weaponCoolOffTimeRate: 1
+  weaponCoolOffOnFix: 0.6
 --- !u!82 &689446364
 AudioSource:
   m_ObjectHideFlags: 0
@@ -729,7 +735,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
