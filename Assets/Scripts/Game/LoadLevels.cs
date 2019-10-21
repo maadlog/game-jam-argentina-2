@@ -5,8 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class LoadLevels : MonoBehaviour
 {
+    string managingScene;
    public void LoadLevel(string scene)
     {
-        SceneManager.LoadScene(scene);
+        managingScene = scene;
+        LevelFader.GetInstance(this.gameObject).FadeIn();
+    }
+
+    public void FinishedFadeIn() {
+        SceneManager.LoadScene(managingScene);
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+// This class serves as game manager and dialog coordinator for the "Introduction" scene.
+// Please refactor soon to separate concerns and enable reutilization of the Dialog component (TextMeshPro)
 public class Dialog : MonoBehaviour
 {
     #region Typing:
@@ -24,12 +26,12 @@ public class Dialog : MonoBehaviour
     private AudioSource audioSource;
     #endregion
 
-    Animator levelFaderAnimator;
+    LevelFader levelFader;
 
     private void Start()
     {
-        levelFaderAnimator = GameObject.FindGameObjectWithTag("LevelFader").GetComponent<Animator>();
-        levelFaderAnimator.Play("Invisible");
+        levelFader = LevelFader.GetInstance(this.gameObject);
+        levelFader.Invisible();
 
         GeneralTankShouldBeSpeaking = true;
         activeSentence = StartCoroutine(Type()); //Inicio la coroutine de escribir
@@ -44,6 +46,10 @@ public class Dialog : MonoBehaviour
         if (GeneralTankShouldBeSpeaking && !GeneralTankIsSpeaking) {
             GeneralTankIsSpeaking = true;
             GeneralTank.GetComponent<Animator>().Play("Speaking");
+        }
+
+        if (Input.anyKeyDown) {
+            continueButton.SetActive(true);
         }
 
         if(textDisplay.text == sentences[index]) //si el texto llego al final de los caracteres que tenia la oracion, me detengo
@@ -121,10 +127,10 @@ public class Dialog : MonoBehaviour
         GeneralTankShouldBeSpeaking = false;
         GeneralTankIsSpeaking = false;
         GeneralTank.GetComponent<Animator>().Play("Idle");
-        levelFaderAnimator.Play("FadeIn");
+        levelFader.FadeIn();
     }
 
-    private void FinishedFadeOut() {
+    public void FinishedFadeIn() {
         SceneManager.LoadScene(2); // Load level 1 (Build index 2)
     }
 }

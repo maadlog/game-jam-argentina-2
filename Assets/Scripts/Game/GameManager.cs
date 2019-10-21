@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
 	public Transform[] playerSpawnPoints;
 	public GameObject playerPrefab;
 
+	LevelFader levelFader;
+
 	// Start is called before the first frame update
 	void Awake()
 	{
@@ -59,6 +61,11 @@ public class GameManager : MonoBehaviour
 
 		manager = Manager.GetInstance();
 		CreatePlayers();
+	}
+
+	void Start() {
+		levelFader = LevelFader.GetInstance(this.gameObject);
+		levelFader.Invisible();
 	}
 
 	// Update is called once per frame
@@ -92,11 +99,6 @@ public class GameManager : MonoBehaviour
 		this.score = PlayerPrefs.GetInt("Score");
 		this.score += score;
 		PlayerPrefs.SetInt("Score", this.score);
-	}
-
-	public void ChangeLevel()
-	{
-		SceneManager.LoadScene(GameObject.FindObjectOfType<NextLevel>().nextLevel);
 	}
 
 	void GameOver()
@@ -189,7 +191,7 @@ public class GameManager : MonoBehaviour
 	{
 		Time.timeScale = 0f;
 	}
-	void Retomar()
+	public void Retomar()
 	{
 		Time.timeScale = 1f;
 	}
