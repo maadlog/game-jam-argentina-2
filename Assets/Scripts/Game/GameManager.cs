@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
 	int max_refugees = 15;
 	static GameManager gameManager;
 	float menuTimer;
-	bool activateFadeOff = false;
-	GameObject fadeOff;
 	public AudioSource explotionSound;
 	public AudioSource enemyDeathSound;
 	int kills;
@@ -33,6 +31,8 @@ public class GameManager : MonoBehaviour
 	Manager manager;
 	public Transform[] playerSpawnPoints;
 	public GameObject playerPrefab;
+
+	LevelFader levelFader;
 
 	// Start is called before the first frame update
 	void Awake()
@@ -61,15 +61,19 @@ public class GameManager : MonoBehaviour
 		CreatePlayers();
 	}
 
+	void Start() {
+		levelFader = LevelFader.GetInstance(this.gameObject);
+		levelFader.FadeOut();
+	}
+	public void FinishedFadeOut() {
+		//Do nothing
+	}
+
 	// Update is called once per frame
 	void Update()
 	{
 		if (isInGame == false)
 		{ Transiciones(); }
-		if (activateFadeOff)
-		{
-
-		}
 
 		if (end == true)
 		{
@@ -92,11 +96,6 @@ public class GameManager : MonoBehaviour
 		this.score = PlayerPrefs.GetInt("Score");
 		this.score += score;
 		PlayerPrefs.SetInt("Score", this.score);
-	}
-
-	public void ChangeLevel()
-	{
-		SceneManager.LoadScene(GameObject.FindObjectOfType<NextLevel>().nextLevel);
 	}
 
 	void GameOver()
@@ -189,7 +188,7 @@ public class GameManager : MonoBehaviour
 	{
 		Time.timeScale = 0f;
 	}
-	void Retomar()
+	public void Retomar()
 	{
 		Time.timeScale = 1f;
 	}
