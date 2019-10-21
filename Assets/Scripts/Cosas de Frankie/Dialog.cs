@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
 public class Dialog : MonoBehaviour
 {
     #region Typing:
@@ -23,26 +24,39 @@ public class Dialog : MonoBehaviour
     #endregion
     private void Start()
     {
-
-        StartCoroutine(Type()); //Inicio la coroutine de escribir
-       
+        GeneralTankShouldBeSpeaking = true;
+        activeSentence = StartCoroutine(Type()); //Inicio la coroutine de escribir
+        
         audioSource = gameObject.GetComponent<AudioSource>(); //Obtengo el audio source del gameobject(en este caso es el textManager)
         
     }
+    private bool GeneralTankIsSpeaking;
+    private bool GeneralTankShouldBeSpeaking;
     private void Update() 
     {
+        if (GeneralTankShouldBeSpeaking && !GeneralTankIsSpeaking) {
+            GeneralTankIsSpeaking = true;
+            GeneralTank.GetComponent<Animator>().Play("Speaking");
+        }
+
         if(textDisplay.text == sentences[index]) //si el texto llego al final de los caracteres que tenia la oracion, me detengo
         {
             continueButton.SetActive(true); //Activo el boton(Feature a prueba de ansiosos)
-           GeneralTank.gameObject.GetComponent<Animator>().enabled = false; //Detengo la animacion(Esto lo para en cualquier frame, hay que cambiarlo)
+
+            GeneralTankShouldBeSpeaking = false;
+            GeneralTankIsSpeaking = false;
+            GeneralTank.GetComponent<Animator>().Play("Idle");
         } 
     }
+
+    private bool BreakCorroutines = false;
+
     IEnumerator Type() //Coroutine que escribe caracter por caracter.
     { //Parte del codigo que escribe
-          GeneralTank.gameObject.GetComponent<Animator>().enabled = true; //Hago que comience la animacion del genral Tank Hablando
 
         foreach (char letter in sentences[index].ToCharArray()) //Por cada caracter en las oraciones: 
         {
+
             #region Escritura: 
             textDisplay.text += letter; // voy agregando de a un caracter al textMeshPro
             yield return new WaitForSeconds(typeSpeed); //Le doy una velocidad de typeo
@@ -65,26 +79,40 @@ public class Dialog : MonoBehaviour
     /*Esto hace que cuando este activo el boton y sea presionado, se aumente el indice del array
     de oraciones y pase al siguiente texto
      */
+     Coroutine activeSentence;
     public void NextSentence() 
     {  
         if(index < sentences.Length -1) //Si el indice es menor que la cantidad de oraciones -1
         {
-            GeneralTank.gameObject.GetComponent<Animator>().PlayInFixedTime("general", 0); //Esto es una prueba, no funciona
-            
+            if (activeSentence != null) {
+                StopCoroutine(activeSentence);
+            }
             index++; //Sumo uno al indice
-             textDisplay.text = ""; //Imprimo un caracter vacio
-             StartCoroutine(Type()); //Y comieno la rutina de escribir
+            textDisplay.text = ""; //Imprimo un caracter vacio
 
+            GeneralTankShouldBeSpeaking = true; //Hago que comience la animacion del genral Tank Hablando
+        
+            activeSentence = StartCoroutine(Type()); //Y comieno la rutina de escribir
+
+            if (index == sentences.Length - 1) {
+                continueButton.GetComponent<TextMeshProUGUI>().text = "Start!";
+            }
         }
-
         else
         {
             textDisplay.text = ""; //Sino, imprimo un texto vacio
+            activeSentence = null;
             continueButton.SetActive(false); //Y no activo el boton todavia.
 
+            EndedPresentation();
         }
        
     }
 
-    
+    private void EndedPresentation()
+    {
+        GeneralTankShouldBeSpeaking = false;
+        GeneralTankIsSpeaking = false;
+        GeneralTank.GetComponent<Animator>().Play("Idle");
+    }
 }
