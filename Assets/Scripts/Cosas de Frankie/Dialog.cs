@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Dialog : MonoBehaviour
 {
@@ -22,8 +23,14 @@ public class Dialog : MonoBehaviour
     public AudioClip typingSound;
     private AudioSource audioSource;
     #endregion
+
+    Animator levelFaderAnimator;
+
     private void Start()
     {
+        levelFaderAnimator = GameObject.FindGameObjectWithTag("LevelFader").GetComponent<Animator>();
+        levelFaderAnimator.Play("Invisible");
+
         GeneralTankShouldBeSpeaking = true;
         activeSentence = StartCoroutine(Type()); //Inicio la coroutine de escribir
         
@@ -114,5 +121,10 @@ public class Dialog : MonoBehaviour
         GeneralTankShouldBeSpeaking = false;
         GeneralTankIsSpeaking = false;
         GeneralTank.GetComponent<Animator>().Play("Idle");
+        levelFaderAnimator.Play("FadeIn");
+    }
+
+    private void FinishedFadeOut() {
+        SceneManager.LoadScene(2); // Load level 1 (Build index 2)
     }
 }
