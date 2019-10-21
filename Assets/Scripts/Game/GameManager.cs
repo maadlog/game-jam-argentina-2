@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
 	int max_refugees = 15;
 	static GameManager gameManager;
 	float menuTimer;
-	bool activateFadeOff = false;
-	GameObject fadeOff;
 	public AudioSource explotionSound;
 	public AudioSource enemyDeathSound;
 	int kills;
@@ -65,7 +63,10 @@ public class GameManager : MonoBehaviour
 
 	void Start() {
 		levelFader = LevelFader.GetInstance(this.gameObject);
-		levelFader.Invisible();
+		levelFader.FadeOut();
+	}
+	public void FinishedFadeOut() {
+		//Do nothing
 	}
 
 	// Update is called once per frame
@@ -73,10 +74,6 @@ public class GameManager : MonoBehaviour
 	{
 		if (isInGame == false)
 		{ Transiciones(); }
-		if (activateFadeOff)
-		{
-
-		}
 
 		if (end == true)
 		{
