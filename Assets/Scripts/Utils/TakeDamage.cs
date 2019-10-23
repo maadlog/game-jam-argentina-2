@@ -27,6 +27,7 @@ public class TakeDamage : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+        var mng = Manager.GetInstance();
 		health = startHealth;
 		target = this.GetComponent<IDamageable>();
 	}
@@ -63,9 +64,10 @@ public class TakeDamage : MonoBehaviour
 		if (health > 0)
 		{
 			health -= 10;
+            BossLifeBar.ins.RecibirDaño(10);
 		}
-		else
-		{
+		else 
+        {
 			Kill();
 		}
 

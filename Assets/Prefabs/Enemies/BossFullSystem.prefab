@@ -103,7 +103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &285864576614513813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -787,9 +787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ee2a4ecb8afc947b7a106389d4ed84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 7
   startWaitTime: 2
-  fullBossPrefab: {fileID: 9220492840417106902}
   generateChildrens: 2
   shootWaitTime: 1.5
   BossId: 0

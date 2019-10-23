@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour, IDamageable
 {
-	public float moveSpeed = 1f;
+	public float moveSpeed = 0.5f;
 	public float startWaitTime = 2f;
 
     private bool emerging = true;
@@ -229,7 +229,8 @@ public class Boss : MonoBehaviour, IDamageable
             GameManager.getGameManager().RegisterBoss();
             GameManager.getGameManager().RegisterBoss();
             int newBossId = this.BossId * 10 + 1;
-            int newHealth = Mathf.RoundToInt( damageComponent.startHealth / 2);
+            int newHealth = Mathf.RoundToInt( damageComponent
+                .startHealth / 2);
 
             var miniboss = Instantiate(GameManager.getGameManager().BossPrefab, Vector3.zero, Quaternion.identity);
             var minibossDirector = miniboss.GetComponentInChildren<Boss>();
@@ -240,7 +241,7 @@ public class Boss : MonoBehaviour, IDamageable
             minibossDirector.shoots = shoots - 1;
             minibossDirector.transform.localScale = this.transform.localScale * 0.8f;
             minibossDirector.SetHealth(newHealth);
-
+            
             newBossId = this.BossId * 10 + 2;
             miniboss = Instantiate(GameManager.getGameManager().BossPrefab, Vector3.zero, Quaternion.identity);
             minibossDirector = miniboss.GetComponentInChildren<Boss>();
