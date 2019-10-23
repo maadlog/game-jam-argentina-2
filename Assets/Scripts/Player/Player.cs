@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 	System.Random random = new System.Random();
 	public AudioSource[] ShootSounds;
 
-	Indicator gunIndicator { get; set; }
+	HeatIndicator gunIndicator { get; set; }
 
 	// Axis and button strings to set with controller number
 	string horizontalInput;
@@ -39,9 +39,8 @@ public class Player : MonoBehaviour
 		animator = GetComponent<Animator>();
 		shootTimer = shootColdDown;
 		gunIndicator = GameObject
-			.FindGameObjectsWithTag("GunIndicator")
-			.FirstOrDefault(x => x.name.Contains("MainGun"))
-			?.GetComponent<Indicator>();
+			.FindGameObjectWithTag("GunIndicator")
+			.GetComponent<HeatIndicator>();
 	}
 
 	// Update is called once per frame
