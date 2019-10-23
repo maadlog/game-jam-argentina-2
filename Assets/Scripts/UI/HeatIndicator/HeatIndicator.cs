@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class HeatIndicator : MonoBehaviour
 {
+    public enum Position
+    {
+        Left, Right
+    }
     HeatIndicatorMask mask;
     HeatIndicatorHint hint;
     HeatIndicatorArrow arrow;

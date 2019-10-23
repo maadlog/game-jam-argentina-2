@@ -198,10 +198,15 @@ public class GameManager : MonoBehaviour
 		for (int i = 0; i < manager.Players; i++)
 		{
 			GameObject player = Instantiate(playerPrefab, playerSpawnPoints[i].position, Quaternion.identity);
-			player.GetComponent<Player>().SetControllerNumber(i + 1);
+			Player playerComponent = player.GetComponent<Player>();
+			playerComponent.SetControllerNumber(i + 1);
+			
 			if (i == 1)
 			{
+				playerComponent.gunIndicator = MainCanvas.GetInstance().CreateIndicator(HeatIndicator.Position.Right);
 				player.GetComponentInChildren<SpriteRenderer>().color = Color.cyan;
+			} else {
+				playerComponent.gunIndicator = MainCanvas.GetInstance().CreateIndicator(HeatIndicator.Position.Left);
 			}
 		}
 	}
