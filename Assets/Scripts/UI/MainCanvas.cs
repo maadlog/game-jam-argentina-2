@@ -5,17 +5,14 @@ public class MainCanvas: MonoBehaviour
     private static MainCanvas mainCanvas = null;
 	void Awake()
 	{
+        // make it singleton
 		if (mainCanvas == null)
 		{
 			mainCanvas = this;
-			DontDestroyOnLoad(gameObject);
 		}
 		else
 		{
-			if (mainCanvas != this)
-			{
-				Destroy(gameObject);
-			}
+			Destroy(this);
 		}
 	}
 	public static MainCanvas GetInstance()

@@ -319,6 +319,7 @@ MonoBehaviour:
   - {fileID: 1955128186}
   playerPrefab: {fileID: 8737942959433159635, guid: c15ae4352569c3646916cafff3566d76,
     type: 3}
+  mainCanvas: {fileID: 762824808}
 --- !u!4 &174046680
 Transform:
   m_ObjectHideFlags: 0
@@ -821,7 +822,7 @@ PrefabInstance:
     - target: {fileID: 120992907318818306, guid: 234b49d15b9a68045a25d8a1a296ea50,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 120992907318818306, guid: 234b49d15b9a68045a25d8a1a296ea50,
         type: 3}
@@ -1733,6 +1734,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750900610}
   m_CullTransparentMesh: 0
+--- !u!114 &762824808 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1088874020233001218, guid: d9477274f983ac84d8712b8938dacdcd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2326999090895761426}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e44c973217f4c279211429277471ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &766300417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4044,7 +4057,7 @@ PrefabInstance:
     - target: {fileID: 2326999091708468562, guid: d9477274f983ac84d8712b8938dacdcd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2326999091708468562, guid: d9477274f983ac84d8712b8938dacdcd,
         type: 3}

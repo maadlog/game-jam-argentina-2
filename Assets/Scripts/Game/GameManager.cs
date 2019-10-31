@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 	public GameObject playerPrefab;
 
 	LevelFader levelFader;
+	public MainCanvas mainCanvas;
 
 	// Start is called before the first frame update
 	void Awake()
@@ -203,10 +204,10 @@ public class GameManager : MonoBehaviour
 			
 			if (i == 1)
 			{
-				playerComponent.gunIndicator = MainCanvas.GetInstance().CreateIndicator(HeatIndicator.Position.Right);
+				playerComponent.gunIndicator = mainCanvas.CreateIndicator(HeatIndicator.Position.Right);
 				player.GetComponentInChildren<SpriteRenderer>().color = Color.cyan;
 			} else {
-				playerComponent.gunIndicator = MainCanvas.GetInstance().CreateIndicator(HeatIndicator.Position.Left);
+				playerComponent.gunIndicator = mainCanvas.CreateIndicator(HeatIndicator.Position.Left);
 			}
 		}
 	}
