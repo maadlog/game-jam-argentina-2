@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
 	int score = 0;
 	int refugees = 0;
-	int max_refugees = 15;
+	int max_refugees;
 	static GameManager gameManager;
 	float menuTimer;
 	public AudioSource explotionSound;
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
 	LevelFader levelFader;
 	public MainCanvas mainCanvas;
-
+   public  NextLevel nextlvl;
 	// Start is called before the first frame update
 	void Awake()
 	{
@@ -60,7 +60,14 @@ public class GameManager : MonoBehaviour
 
 		manager = Manager.GetInstance();
 		CreatePlayers();
-	}
+
+        if (nextlvl != null)
+        {
+            max_refugees = nextlvl.counterLimit;
+        }
+        
+
+    }
 
 	void Start() {
 		levelFader = LevelFader.GetInstance(this.gameObject);

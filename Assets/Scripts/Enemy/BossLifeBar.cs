@@ -20,13 +20,13 @@ public class BossLifeBar : MonoBehaviour
 
         if (Manager.GetInstance().Players == 1)
         {
-            totallife =150;
-            healthboss.startHealth = 150;
+            totallife = 285;
+            healthboss.startHealth = 285;
         }
         else
         {
-            totallife = 300;
-            healthboss.startHealth = 300;
+            totallife = 530;
+            healthboss.startHealth = 530;
         }
     
        // total = totallife + Mathf.Round((totallife / 2)) + Mathf.Round((totallife / 2)) + Mathf.Round((totallife / 2)) + Mathf.Round((totallife / 2))/*+ (totallife / 6)*/;

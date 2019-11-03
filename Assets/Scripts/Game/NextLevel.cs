@@ -6,4 +6,6 @@ public class NextLevel : MonoBehaviour
 {
     public string nextLevel;
     public int counterLimit;
+
+
 }

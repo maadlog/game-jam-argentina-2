@@ -15,4 +15,9 @@ public class LoadLevels : MonoBehaviour
     public void FinishedFadeIn() {
         SceneManager.LoadScene(managingScene);
     }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }
