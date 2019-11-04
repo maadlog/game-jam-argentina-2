@@ -156,7 +156,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -100, y: -30}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 168.9, y: 184}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &11847378
 MonoBehaviour:
@@ -848,7 +848,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1997276777}
-  - component: {fileID: 1997276778}
   - component: {fileID: 1997276779}
   - component: {fileID: 1997276780}
   m_Layer: 0
@@ -872,37 +871,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1997276778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997276776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df966ff9e0528bd4bb376750323f2be2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textDisplay: {fileID: 1166642684}
-  sentences:
-  - Welcome soldier! ... During the last 50 years our star farms were the only source
-    of food for the super populated planet earth.
-  - But there's an interestellar plague ready to end us all...
-  - THE DEDBUX!
-  - We are the last hope, the Dedbux Control Division Team.
-  - Soldier, your mission, if you choose to accep it, it's to protect our farms and
-    terminate the dedbux boss located in their planet.
-  - Good luck.
-  typeSpeed: 0.08
-  continueButton: {fileID: 108074944}
-  GeneralTank: {fileID: 11847376}
-  Typing:
-  - {fileID: 8300000, guid: a4ba54d9e62c7da44ab2e7e002e89e01, type: 3}
-  - {fileID: 8300000, guid: 6880f6cb5de06934eab969cc77b2563f, type: 3}
-  - {fileID: 8300000, guid: 847c82aca7b412e4bb74e7d951282b73, type: 3}
-  - {fileID: 8300000, guid: 4778ebd4d9a37894da507296d062b8ad, type: 3}
-  typingSound: {fileID: 0}
 --- !u!82 &1997276779
 AudioSource:
   m_ObjectHideFlags: 0
