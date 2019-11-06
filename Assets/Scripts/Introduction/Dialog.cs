@@ -23,6 +23,8 @@ public class Dialog : MonoBehaviour
 	public List<AudioClip> Typing;
 	public AudioClip typingSound;
 	private AudioSource audioSource;
+    public AudioClip music;
+   
 	#endregion
 
 	LevelFader levelFader;
@@ -46,6 +48,8 @@ public class Dialog : MonoBehaviour
 		{
 			GeneralTankIsSpeaking = true;
 			GeneralTank.GetComponent<Animator>().Play("Speaking");
+            audioSource.clip = music;
+            audioSource.Play();
 		}
 
 		if (Input.anyKeyDown)
@@ -131,6 +135,7 @@ public class Dialog : MonoBehaviour
 		GeneralTankIsSpeaking = false;
 		GeneralTank.GetComponent<Animator>().Play("Idle");
 		levelFader.FadeIn();
+        audioSource.Stop();
 	}
 
 	public void FinishedFadeIn()
