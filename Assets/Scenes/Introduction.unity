@@ -155,8 +155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -30}
-  m_SizeDelta: {x: 168.9, y: 184}
+  m_AnchoredPosition: {x: -167.8, y: -30}
+  m_SizeDelta: {x: 135, y: 147.1}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &11847378
 MonoBehaviour:
@@ -886,9 +886,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1166642684}
   sentences:
-  - Lorem
-  - asdfgahhas
-  - "\xF1aljsd\xF1ajsldja\xF1lsdja\xF1lsjdl\xF1ajs\xF1fja\xF1ljg\xF1jh\xF1gj\xF1ja\xF1sjd\xF1lajs\xF1ljg\xF1jh\xF1lj\xF1ajs\xF1ldja\xF1sjh\xF1j\xF1ajs\xF1ldja\xF1lsjg\xF1ljh\xF1lja\xF1lsjdjas\xF1lj\xF1j\xF1h"
+  - Welcome soldier! ... During the last 50 years our star farms were the only source
+    of food for the super populated planet earth.
+  - But there's an interestellar plague ready to end us all...
+  - THE DEDBUX!
+  - We are the last hope, the Dedbux Control Division Team.
+  - Soldier, your mission, if you choose to accep it, it's to protect our farms and
+    terminate the dedbux boss located in their planet.
+  - Good luck.
   typeSpeed: 0.01
   continueButton: {fileID: 108074944}
   GeneralTank: {fileID: 11847376}
@@ -898,6 +903,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 453a2e3fbf28eec4f924c648248af624, type: 3}
   - {fileID: 8300000, guid: 57736189212b6be44a2e031ec94603a4, type: 3}
   typingSound: {fileID: 0}
+  music: {fileID: 0}
 --- !u!82 &1997276779
 AudioSource:
   m_ObjectHideFlags: 0
