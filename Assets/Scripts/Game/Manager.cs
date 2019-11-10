@@ -33,7 +33,9 @@ public class Manager : MonoBehaviour
 		Score = 0;
 		HighScore = 0;
 		Players = 1;
-	}
+        PlayerPrefs.SetInt("Score0", 0);
+        PlayerPrefs.SetInt("Score1", 0);
+    }
 
 	public static Manager GetInstance()
 	{

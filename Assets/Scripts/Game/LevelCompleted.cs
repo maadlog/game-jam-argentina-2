@@ -9,7 +9,9 @@ public class LevelCompleted : MonoBehaviour
     public GameObject transicionPanel;
     public Text refugiadostotales;
     public Text cantidaddekills;
+    public Text cantidaddekills2;
     public Text totalScore;
+    public Text totalScore2;
 
     void Start()
     {
@@ -30,16 +32,27 @@ public class LevelCompleted : MonoBehaviour
 public void WinLevel()
     {
         transicionPanel.SetActive(true);
-     
-
     }
-  public  void ShowKills(int kills)
+  public  void ShowKills(int kills,int kills2)
     {
         cantidaddekills.text = kills.ToString();
+        cantidaddekills2.text = kills2.ToString();
+
+        if (kills2 != 0)
+        {
+            cantidaddekills2.text = kills2.ToString();
+        }
+        else { cantidaddekills2.text = " "; }
     }
 
-   public void ShowScore(int score)
+   public void ShowScore(int score, int score2)
     {
         totalScore.text = score.ToString();
+        if (score2 != 0)
+        {
+            totalScore2.text = score2.ToString();
+        }
+        else { totalScore2.text = " "; }
+       
     }
 }

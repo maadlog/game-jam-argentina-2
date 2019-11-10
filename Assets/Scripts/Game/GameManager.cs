@@ -14,13 +14,13 @@ public class GameManager : MonoBehaviour
 	public Text CounterText;
 
 	int score = 0;
+	int score2 = 0;
 	int refugees = 0;
 	int max_refugees;
 	static GameManager gameManager;
 	float menuTimer;
 	public AudioSource explotionSound;
 	public AudioSource enemyDeathSound;
-	int kills;
 	public GameObject LevelCompleted;
 	public bool isInGame;
 	bool end;
@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 	LevelFader levelFader;
 	public MainCanvas mainCanvas;
    public  NextLevel nextlvl;
+
+    GameObject[] players = new GameObject[2];
 	// Start is called before the first frame update
 	void Awake()
 	{
@@ -99,14 +101,18 @@ public class GameManager : MonoBehaviour
 		return gameManager;
 	}
 
-	public void UpdateScore(int score)
-	{
-		this.score = PlayerPrefs.GetInt("Score");
-		this.score += score;
-		PlayerPrefs.SetInt("Score", this.score);
-	}
+    public void UpdateScore(int jugador, int score)
+    {
+        
+            players[jugador].GetComponent<Player>().UpdateScore(score);
+ 
+        //this.score = PlayerPrefs.GetInt("Score");
+        //this.score += score;
+        //PlayerPrefs.SetInt("Score", this.score);
 
-	void GameOver()
+    }
+
+    void GameOver()
 	{
 		isInGame = false;
 		// show message
@@ -178,19 +184,36 @@ public class GameManager : MonoBehaviour
 		enemyDeathSound.Play();
 	}
 
-	public void KillsPlayer()
-	{
-		kills++;
-	}
+    public void KillsPlayer(int jugador)
+    {
+       players[jugador].GetComponent<Player>().Kill();
+    }
 
-	public void CalcularScore()
+    public void CalcularScore()
 	{
-		UpdateScore((refugees * 18) + (kills * 26));
-		LevelCompleted.GetComponent<LevelCompleted>().ShowKills(kills);
-		LevelCompleted.GetComponent<LevelCompleted>().ShowRefugees(refugees);
-		LevelCompleted.GetComponent<LevelCompleted>().ShowScore(score);
+        int kills;
+        int score;
+        //UpdateScore(1,(refugees * 18) + (kills * 26));
+        if (players[1] != null)
+        {
+            kills = players[1].GetComponent<Player>().kills;
+            players[1].GetComponent<Player>().UpdateScore( (refugees * 2) + (players[1].GetComponent<Player>().kills * 3));
+            players[0].GetComponent<Player>().UpdateScore( (refugees * 2) + (players[0].GetComponent<Player>().kills * 3));
+            score = players[1].GetComponent<Player>().Score;
+        }
+        else { kills = 0;
+            players[0].GetComponent<Player>().UpdateScore((refugees * 2) + (players[0].GetComponent<Player>().kills * 3));
+            score = 0;
 
-	}
+        }
+       
+        
+
+        LevelCompleted.GetComponent<LevelCompleted>().ShowKills(players[0].GetComponent<Player>().kills, kills);
+        LevelCompleted.GetComponent<LevelCompleted>().ShowRefugees(refugees);
+        LevelCompleted.GetComponent<LevelCompleted>().ShowScore(players[0].GetComponent<Player>().Score, score);
+
+    }
 
 	void Transiciones()
 	{
@@ -206,16 +229,21 @@ public class GameManager : MonoBehaviour
 		for (int i = 0; i < manager.Players; i++)
 		{
 			GameObject player = Instantiate(playerPrefab, playerSpawnPoints[i].position, Quaternion.identity);
-			Player playerComponent = player.GetComponent<Player>();
-			playerComponent.SetControllerNumber(i + 1);
-			
-			if (i == 1)
+            players[i] = player;
+            player.GetComponent<Player>().PLayerNumber = i;
+            Player playerComponent = player.GetComponent<Player>();
+            playerComponent.SetControllerNumber(i + 1);
+         
+
+            if (i == 1)
 			{
 				playerComponent.gunIndicator = mainCanvas.CreateIndicator(HeatIndicator.Position.Right);
 				player.GetComponentInChildren<SpriteRenderer>().color = Color.cyan;
 			} else {
 				playerComponent.gunIndicator = mainCanvas.CreateIndicator(HeatIndicator.Position.Left);
 			}
-		}
+
+            
+        }
 	}
 }

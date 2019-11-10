@@ -39,9 +39,13 @@ public class OnCollisionDie : MonoBehaviour
 		// collision with bullet
 		if (collision.CompareTag("Bullet"))
 		{
-			gameManager.UpdateScore(1);
+           
+            
+          gameManager.UpdateScore(collision.gameObject.GetComponent<Points>().refjugador, 1);
+            
+			//gameManager.UpdateScore(1);
 			EnemyDeath();
-            gameManager.KillsPlayer();
+           gameManager.KillsPlayer(collision.gameObject.GetComponent<Points>().refjugador);
             GameObject.Destroy(collision.gameObject);
 		}
 	}

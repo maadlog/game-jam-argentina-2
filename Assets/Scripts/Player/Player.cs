@@ -6,6 +6,7 @@ using System.Linq;
 
 public class Player : MonoBehaviour
 {
+    public int PLayerNumber;
 	public float movementSpeed = 1f;
 	public float rotateSpeed = 1f;
 	public float shootColdDown = 2f;
@@ -32,13 +33,18 @@ public class Player : MonoBehaviour
 	string fixAInput;
 	string fixBInput;
 
+    public int Score;
+    public int kills;
+    public string s;
 	// Start is called before the first frame update
 	void Start()
 	{
 		cameraAnimator = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
 		animator = GetComponent<Animator>();
 		shootTimer = shootColdDown;
-	}
+        s = "Score" + PLayerNumber.ToString();
+      Score = PlayerPrefs.GetInt(s);
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -180,8 +186,10 @@ public class Player : MonoBehaviour
 
 				var displace = gun.transform.TransformVector(new Vector3(0, disp, 0));
 				var trasn = gun.transform.position + displace;
-				Instantiate(bullet, trasn, transform.rotation);
-				PlayShootSound();
+                GameObject bullet_ins= Instantiate(bullet, trasn, transform.rotation);
+                bullet_ins.AddComponent<Points>().refjugador = PLayerNumber;
+
+                PlayShootSound();
 			}
 
 			shootTimer = shootColdDown;
@@ -197,4 +205,16 @@ public class Player : MonoBehaviour
 		var i = random.Next(0, ShootSounds.Length);
 		ShootSounds[i].Play();
 	}
+
+    public void UpdateScore(int score)
+    {
+       Score = PlayerPrefs.GetInt(s);
+        Score += score;
+        PlayerPrefs.SetInt(s, Score);
+    }
+
+    public void Kill()
+    {
+        kills++;
+    }
 }
