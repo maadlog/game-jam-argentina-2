@@ -886,10 +886,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1166642684}
   sentences:
-  - Now soldier, this might be the last time we speak.
-  - you are going into an overkill mission to finaly destroy the dedbux boss.
-  - you might not come alive from this...
-  - but the honors will be all over you, make it for the earth! Good luck!
+  - Thank you for saving those civilians from a certain death, you protected them
+    as a profesional!
+  - Now, we need you to collect some fuel for the rocket who will be launching you
+    to the dedbux planet!
+  - It's crucial you protect the rocket...
+  - because if we fail, the earth will be doomed!
+  - Good luck!
   typeSpeed: 0.01
   continueButton: {fileID: 108074944}
   GeneralTank: {fileID: 11847376}
@@ -900,6 +903,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 57736189212b6be44a2e031ec94603a4, type: 3}
   typingSound: {fileID: 0}
   music: {fileID: 0}
+  SceneIndexToLaunchAfter: 4
 --- !u!82 &1997276779
 AudioSource:
   m_ObjectHideFlags: 0

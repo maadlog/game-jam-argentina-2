@@ -3268,7 +3268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c26ba54d3c1f64b8dac8a75ad4d70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: Level2
+  nextLevel: Introduction1_2
   counterLimit: 8
 --- !u!4 &1574444131
 Transform:
@@ -4554,18 +4554,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2326999092430892351, guid: d9477274f983ac84d8712b8938dacdcd,
-        type: 3}
-      propertyPath: m_Text
-      value: '0/8
-
-
-'
-      objectReference: {fileID: 0}
     - target: {fileID: 10191383752949065, guid: d9477274f983ac84d8712b8938dacdcd,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Level2
+      value: Introduction1_2
       objectReference: {fileID: 0}
     - target: {fileID: 2326999091708468562, guid: d9477274f983ac84d8712b8938dacdcd,
         type: 3}
@@ -4712,31 +4704,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2326999092150363746, guid: d9477274f983ac84d8712b8938dacdcd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2326999091955366390, guid: d9477274f983ac84d8712b8938dacdcd,
-        type: 3}
-      propertyPath: buttons
-      value: 
-      objectReference: {fileID: 674310767}
-    - target: {fileID: 2326999091955366390, guid: d9477274f983ac84d8712b8938dacdcd,
-        type: 3}
-      propertyPath: delayActivation
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1218854276070743143, guid: d9477274f983ac84d8712b8938dacdcd,
-        type: 3}
-      propertyPath: m_Text
-      value: refugees
-      objectReference: {fileID: 0}
-    - target: {fileID: 2326999092548279196, guid: d9477274f983ac84d8712b8938dacdcd,
-        type: 3}
-      propertyPath: buttons
-      value: 
-      objectReference: {fileID: 386053796}
     - target: {fileID: 2718247692016859254, guid: d9477274f983ac84d8712b8938dacdcd,
         type: 3}
       propertyPath: cantidaddekills2
@@ -4747,6 +4714,39 @@ PrefabInstance:
       propertyPath: totalScore2
       value: 
       objectReference: {fileID: 1896945157}
+    - target: {fileID: 2326999092430892351, guid: d9477274f983ac84d8712b8938dacdcd,
+        type: 3}
+      propertyPath: m_Text
+      value: '0/8
+
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1218854276070743143, guid: d9477274f983ac84d8712b8938dacdcd,
+        type: 3}
+      propertyPath: m_Text
+      value: refugees
+      objectReference: {fileID: 0}
+    - target: {fileID: 2326999092150363746, guid: d9477274f983ac84d8712b8938dacdcd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2326999092548279196, guid: d9477274f983ac84d8712b8938dacdcd,
+        type: 3}
+      propertyPath: buttons
+      value: 
+      objectReference: {fileID: 386053796}
+    - target: {fileID: 2326999091955366390, guid: d9477274f983ac84d8712b8938dacdcd,
+        type: 3}
+      propertyPath: buttons
+      value: 
+      objectReference: {fileID: 674310767}
+    - target: {fileID: 2326999091955366390, guid: d9477274f983ac84d8712b8938dacdcd,
+        type: 3}
+      propertyPath: delayActivation
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9477274f983ac84d8712b8938dacdcd, type: 3}
 --- !u!224 &2326999090895761427 stripped

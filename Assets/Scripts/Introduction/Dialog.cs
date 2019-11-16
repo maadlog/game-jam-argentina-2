@@ -29,15 +29,20 @@ public class Dialog : MonoBehaviour
 
 	LevelFader levelFader;
 
+	public int SceneIndexToLaunchAfter;
+
 	private void Start()
 	{
 		levelFader = LevelFader.GetInstance(this.gameObject);
 		levelFader.Invisible();
+		audioSource = gameObject.GetComponent<AudioSource>(); //Obtengo el audio source del gameobject(en este caso es el textManager)
 
 		GeneralTankShouldBeSpeaking = true;
+		GameManager.getGameManager().Retomar();
+		
 		activeSentence = StartCoroutine(Type()); //Inicio la coroutine de escribir
 
-		audioSource = gameObject.GetComponent<AudioSource>(); //Obtengo el audio source del gameobject(en este caso es el textManager)
+		
 
 	}
 	private bool GeneralTankIsSpeaking;
@@ -140,6 +145,6 @@ public class Dialog : MonoBehaviour
 
 	public void FinishedFadeIn()
 	{
-		SceneManager.LoadScene(2); // Load level 1 (Build index 2)
+		SceneManager.LoadScene(SceneIndexToLaunchAfter); // Load level 1 (Build index 2)
 	}
 }

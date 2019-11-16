@@ -904,6 +904,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 57736189212b6be44a2e031ec94603a4, type: 3}
   typingSound: {fileID: 0}
   music: {fileID: 0}
+  SceneIndexToLaunchAfter: 2
 --- !u!82 &1997276779
 AudioSource:
   m_ObjectHideFlags: 0
